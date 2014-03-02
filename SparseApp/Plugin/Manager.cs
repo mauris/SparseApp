@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparseApp.Plugin
 {
-    class Manager
+    public class Manager
     {
     }
 }

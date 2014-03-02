@@ -7,7 +7,7 @@ using ProtoBuf;
 
 namespace SparseApp.Repository
 {
-    class Manager
+    public class Manager
     {
         protected string configFile;
 
@@ -26,7 +26,7 @@ namespace SparseApp.Repository
             this.configFile = file;
         }
 
-        public void LoadRepositories()
+        public virtual void LoadRepositories()
         {
             using (var file = File.OpenRead(this.configFile))
             {
@@ -34,7 +34,7 @@ namespace SparseApp.Repository
             }
         }
 
-        public void SaveRepositories()
+        public virtual void SaveRepositories()
         {
             using (var file = File.Create(this.configFile))
             {

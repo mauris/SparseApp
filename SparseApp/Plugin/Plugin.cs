@@ -7,7 +7,7 @@ using ProtoBuf;
 namespace SparseApp.Plugin
 {
     [ProtoContract]
-    class Plugin
+    public class Plugin
     {
     }
 }
