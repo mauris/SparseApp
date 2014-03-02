@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RepositoryManager = SparseApp.Repository.MockManager;
 
 namespace SparseApp
 {
@@ -19,9 +20,12 @@ namespace SparseApp
     /// </summary>
     public partial class MainWindow
     {
+        protected RepositoryManager repo = new RepositoryManager();
+
         public MainWindow()
         {
             InitializeComponent();
+            lstRepositories.DataContext = repo.Repositories;
         }
     }
 }
