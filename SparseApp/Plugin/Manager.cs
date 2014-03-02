@@ -9,6 +9,16 @@ namespace SparseApp.Plugin
     {
         protected string folder;
 
+        protected List<Plugin> plugins = new List<Plugin>();
+
+        public List<Plugin> Plugins
+        {
+            get
+            {
+                return this.plugins;
+            }
+        }
+
         public Manager(string folder)
         {
             this.folder = folder;
