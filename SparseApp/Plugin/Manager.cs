@@ -7,5 +7,11 @@ namespace SparseApp.Plugin
 {
     public class Manager
     {
+        protected string folder;
+
+        public Manager(string folder)
+        {
+            this.folder = folder;
+        }
     }
 }
