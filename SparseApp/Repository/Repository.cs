@@ -10,6 +10,6 @@ namespace SparseApp.Repository
     class Repository
     {
         [ProtoMember(1)]
-        public string Path { get; set; };
+        public string Path { get; set; }
     }
 }
