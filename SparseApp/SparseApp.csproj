@@ -65,6 +65,7 @@
     <Compile Include="Plugin\Manager.cs" />
     <Compile Include="Plugin\Plugin.cs" />
     <Compile Include="Repository\Manager.cs" />
+    <Compile Include="Repository\MockManager.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
