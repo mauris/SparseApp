@@ -9,7 +9,12 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0">
+        <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0">
         </ListBox>
