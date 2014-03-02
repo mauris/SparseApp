@@ -13,6 +13,14 @@ namespace SparseApp.Repository
 
         protected List<Repository> repositories = new List<Repository>();
 
+        public List<Repository> Repositories
+        {
+            get
+            {
+                return this.repositories;
+            }
+        }
+
         public Manager(string file)
         {
             this.configFile = file;
