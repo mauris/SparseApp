@@ -12,7 +12,7 @@
         <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path}"></TextBlock>
+                    <TextBlock Text="{Binding Basename}"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
