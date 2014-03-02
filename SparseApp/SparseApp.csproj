@@ -56,6 +56,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="YamlSerializer">
+      <HintPath>..\packages\YamlSerializer.1.0\lib\Net35\YamlSerializer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
