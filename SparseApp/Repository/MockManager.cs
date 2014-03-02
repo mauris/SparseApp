@@ -16,5 +16,13 @@ namespace SparseApp.Repository
             repositories.Add(new Repository { Path = @"C:\Users\Sam\Documents\GitHub\packfire-framework" });
             repositories.Add(new Repository { Path = @"C:\Users\Sam\Documents\GitHub\cdac-rms" });
         }
+
+        public override void LoadRepositories()
+        {
+        }
+
+        public override void SaveRepositories()
+        {
+        }
     }
 }
