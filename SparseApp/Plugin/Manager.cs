@@ -11,9 +11,9 @@ namespace SparseApp.Plugin
     {
         protected string folder;
 
-        protected List<Plugin> plugins = new List<Plugin>();
+        protected Dictionary<String, Plugin> plugins = new Dictionary<String, Plugin>();
 
-        public List<Plugin> Plugins
+        public Dictionary<String, Plugin> Plugins
         {
             get
             {
@@ -26,14 +26,14 @@ namespace SparseApp.Plugin
             this.folder = folder;
         }
 
-        public virtual void LoadPlugins()
+        public virtual void LoadAvailablePlugins()
         {
-            plugins = new List<Plugin>();
+            plugins = new Dictionary<String, Plugin>();
             var serializer = new YamlSerializer();
             foreach (string file in Directory.EnumerateFiles(folder, "*.yml"))
             {
                 var plugin = serializer.DeserializeFromFile(file, typeof(Plugin))[0];
-                plugins.Add((Plugin)plugin);
+                plugins.Add(Path.GetFileNameWithoutExtension(file), (Plugin)plugin);
             }
         }
     }
