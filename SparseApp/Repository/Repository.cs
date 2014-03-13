@@ -13,6 +13,9 @@ namespace SparseApp.Repository
         [ProtoMember(1)]
         public string Path { get; set; }
 
+        [ProtoMember(2)]
+        public List<string> Plugins { get; set; }
+
         public string Basename
         {
             get
