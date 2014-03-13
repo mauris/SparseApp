@@ -20,11 +20,14 @@ namespace SparseApp
     /// </summary>
     public partial class MainWindow
     {
-        protected RepositoryManager repo = new RepositoryManager();
+        protected RepositoryManager repo;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            repo = new RepositoryManager("");
+            repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
         }
     }
