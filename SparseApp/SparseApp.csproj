@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Plugin\Manager.cs" />
+    <Compile Include="Plugin\MockManager.cs" />
     <Compile Include="Plugin\Plugin.cs" />
     <Compile Include="Repository\Manager.cs" />
     <Compile Include="Repository\MockManager.cs" />
