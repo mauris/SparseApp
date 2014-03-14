@@ -9,14 +9,19 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}">
+        <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Basename}"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0">
+        <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding}" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 </controls:MetroWindow>

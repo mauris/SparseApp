@@ -11,7 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RepositoryManager = SparseApp.Repository.MockManager;
+using RepositoryManager = SparseApp.Repositories.MockManager;
+using PluginManager = SparseApp.Plugins.MockManager;
+using SparseApp.Repositories;
+using SparseApp.Plugins;
 
 namespace SparseApp
 {
@@ -22,13 +25,34 @@ namespace SparseApp
     {
         protected RepositoryManager repo;
 
+        protected PluginManager plugins;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            plugins = new PluginManager("");
+            plugins.LoadAvailablePlugins();
+
             repo = new RepositoryManager("");
             repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
+        }
+
+        private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Repository repository = (Repository)lstRepositories.SelectedItem;
+
+            List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+            lstPlugins.DataContext = values;
+        }
+
+        private void lstPlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lstPlugins.SelectedItem != null)
+            {
+                Plugin plugin = (Plugin)lstPlugins.SelectedItem;
+            }
         }
     }
 }
