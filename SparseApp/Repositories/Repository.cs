@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using ProtoBuf;
 
-namespace SparseApp.Repository
+namespace SparseApp.Repositories
 {
     [ProtoContract]
     public class Repository

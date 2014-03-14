@@ -65,12 +65,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Plugin\Manager.cs" />
-    <Compile Include="Plugin\MockManager.cs" />
-    <Compile Include="Plugin\Plugin.cs" />
-    <Compile Include="Repository\Manager.cs" />
-    <Compile Include="Repository\MockManager.cs" />
-    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Plugins\Manager.cs" />
+    <Compile Include="Plugins\MockManager.cs" />
+    <Compile Include="Plugins\Plugin.cs" />
+    <Compile Include="Repositories\Manager.cs" />
+    <Compile Include="Repositories\MockManager.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

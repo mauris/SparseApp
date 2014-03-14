@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Yaml.Serialization;
 
-namespace SparseApp.Plugin
+namespace SparseApp.Plugins
 {
     public class Manager
     {
