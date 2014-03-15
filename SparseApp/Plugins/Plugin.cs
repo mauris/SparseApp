@@ -65,15 +65,16 @@ namespace SparseApp.Plugins
             process = new Process();
             process.StartInfo = procStartInfo;
 
+            process.EnableRaisingEvents = true;
+
             process.OutputDataReceived += (sender, args) => output += args.Data;
             process.ErrorDataReceived += (sender, args) => output += args.Data;
+            process.Exited += (sender, args) => isRunning = false;
 
             isRunning = true;
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
-
-            process.Exited += (sender, args) => isRunning = false;
         }
 
         public void Halt()
