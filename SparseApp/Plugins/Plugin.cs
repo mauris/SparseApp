@@ -48,6 +48,13 @@ namespace SparseApp.Plugins
             procStartInfo.CreateNoWindow = true;
             procStartInfo.RedirectStandardError = true;
 
+            output = "";
+
+            if (process != null)
+            {
+                process.Kill();
+            }
+
             process = new Process();
             process.StartInfo = procStartInfo;
 
