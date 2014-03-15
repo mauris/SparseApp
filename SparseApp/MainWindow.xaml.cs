@@ -15,6 +15,8 @@ using RepositoryManager = SparseApp.Repositories.MockManager;
 using PluginManager = SparseApp.Plugins.MockManager;
 using SparseApp.Repositories;
 using SparseApp.Plugins;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace SparseApp
 {
@@ -55,9 +57,19 @@ namespace SparseApp
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 
-                plugin.Run(repository.Path);
-
-                txtPluginOutput.Text = plugin.Output;
+                ThreadStart start = delegate()
+                {
+                    plugin.Run(repository.Path);
+                    while (plugin.IsRunning)
+                    {
+                        Dispatcher.Invoke(
+                            DispatcherPriority.Background,
+                            new Action(() => txtPluginOutput.Text = plugin.Output)
+                        );
+                        Thread.Sleep(100);
+                    }
+                };
+                new Thread(start).Start();
             }
         }
 
@@ -67,8 +79,7 @@ namespace SparseApp
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
-
-                txtPluginOutput.Text = plugin.Output;
+                txtPluginOutput.Text = "";
             }
         }
     }
