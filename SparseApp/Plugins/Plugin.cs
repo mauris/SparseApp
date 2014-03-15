@@ -28,22 +28,13 @@ namespace SparseApp.Plugins
             }
         }
 
+        protected bool isRunning = false;
+
         public bool IsRunning
         {
             get
             {
-                if (process != null)
-                {
-                    try
-                    {
-                        Process.GetProcessById(process.Id);
-                        return true;
-                    }
-                    catch (ArgumentException)
-                    {
-                    }
-                }
-                return false;
+                return isRunning;
             }
         }
 
@@ -63,11 +54,27 @@ namespace SparseApp.Plugins
             process.OutputDataReceived += (sender, args) => output += args.Data;
             process.ErrorDataReceived += (sender, args) => output += args.Data;
 
+            isRunning = true;
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
-            process.WaitForExit();
+            process.Exited += (sender, args) => isRunning = false;
+        }
+
+        public void Halt()
+        {
+            if (process != null)
+            {
+                try
+                {
+                    process.Kill();
+                }
+                catch
+                {
+
+                }
+            }
         }
     }
 }
