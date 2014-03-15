@@ -29,6 +29,8 @@ namespace SparseApp
 
         protected PluginManager plugins;
 
+        protected Thread ConsoleUpdatingThread;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -60,16 +62,9 @@ namespace SparseApp
                 ThreadStart start = delegate()
                 {
                     plugin.Run(repository.Path);
-                    while (plugin.IsRunning)
-                    {
-                        Dispatcher.Invoke(
-                            DispatcherPriority.Background,
-                            new Action(() => txtPluginOutput.Text = plugin.Output)
-                        );
-                        Thread.Sleep(100);
-                    }
                 };
                 new Thread(start).Start();
+                RunConsoleUpdating(plugin);
             }
         }
 
@@ -79,7 +74,42 @@ namespace SparseApp
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
-                txtPluginOutput.Text = "";
+
+                RunConsoleUpdating(plugin);
+            }
+        }
+
+        private void RunConsoleUpdating(Plugin plugin)
+        {
+            if (ConsoleUpdatingThread != null)
+            {
+                ConsoleUpdatingThread.Abort();
+            }
+
+            ThreadStart start = delegate()
+            {
+                while (plugin.IsRunning)
+                {
+                    Dispatcher.Invoke(
+                        DispatcherPriority.Background,
+                        new Action(() => txtPluginOutput.Text = plugin.Output)
+                    );
+                    Thread.Sleep(100);
+                }
+                Dispatcher.Invoke(
+                    DispatcherPriority.Background,
+                    new Action(() => txtPluginOutput.Text = plugin.Output)
+                );
+            };
+            ConsoleUpdatingThread = new Thread(start);
+            ConsoleUpdatingThread.Start();
+        }
+
+        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            foreach (KeyValuePair<string, Plugin> item in plugins.Plugins)
+            {
+                item.Value.Halt();
             }
         }
     }
