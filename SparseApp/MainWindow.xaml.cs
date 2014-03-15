@@ -51,7 +51,10 @@ namespace SparseApp
         {
             if (lstPlugins.SelectedItem != null)
             {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
+
+                plugin.Run(repository.Path);
             }
         }
     }
