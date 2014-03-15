@@ -52,7 +52,14 @@ namespace SparseApp.Plugins
 
             if (process != null)
             {
-                process.Kill();
+                try
+                {
+                    process.Kill();
+                }
+                catch
+                {
+
+                }
             }
 
             process = new Process();
