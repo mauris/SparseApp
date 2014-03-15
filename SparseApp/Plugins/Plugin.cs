@@ -46,10 +46,6 @@ namespace SparseApp.Plugins
             process = new Process();
             process.StartInfo = procStartInfo;
             process.Start();
-
-            string result = process.StandardOutput.ReadToEnd();
-
-            Console.WriteLine(result);
         }
     }
 }

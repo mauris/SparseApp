@@ -45,6 +45,7 @@ namespace SparseApp
 
             List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
             lstPlugins.DataContext = values;
+            txtPluginOutput.Text = "";
         }
 
         private void lstPlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -55,6 +56,19 @@ namespace SparseApp
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 
                 plugin.Run(repository.Path);
+
+                txtPluginOutput.Text = plugin.Output;
+            }
+        }
+
+        private void lstPlugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstPlugins.SelectedItem != null)
+            {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
+                Plugin plugin = (Plugin)lstPlugins.SelectedItem;
+
+                txtPluginOutput.Text = plugin.Output;
             }
         }
     }

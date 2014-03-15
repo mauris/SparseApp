@@ -16,12 +16,13 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding}" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+        <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBox Name="txtPluginOutput" Grid.Column="2" Grid.Row="0" IsReadOnly="True"></TextBox>
     </Grid>
 </controls:MetroWindow>
