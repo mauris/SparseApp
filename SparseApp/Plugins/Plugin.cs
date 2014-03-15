@@ -24,28 +24,50 @@ namespace SparseApp.Plugins
         {
             get
             {
+                return output;
+            }
+        }
+
+        public bool IsRunning
+        {
+            get
+            {
                 if (process != null)
                 {
-                    output += process.StandardOutput.ReadToEnd();
+                    try
+                    {
+                        Process.GetProcessById(process.Id);
+                        return true;
+                    }
+                    catch (ArgumentException)
+                    {
+                    }
                 }
-                return output;
+                return false;
             }
         }
 
         public void Run(string path)
         {
-            output = "";
-
             ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + Command);
 
             procStartInfo.RedirectStandardOutput = true;
             procStartInfo.UseShellExecute = false;
             procStartInfo.WorkingDirectory = path;
             procStartInfo.CreateNoWindow = true;
+            procStartInfo.RedirectStandardError = true;
 
             process = new Process();
             process.StartInfo = procStartInfo;
+
+            process.OutputDataReceived += (sender, args) => output += args.Data;
+            process.ErrorDataReceived += (sender, args) => output += args.Data;
+
             process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            process.WaitForExit();
         }
     }
 }
