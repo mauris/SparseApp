@@ -41,6 +41,7 @@ namespace SparseApp
             repo = new RepositoryManager("");
             repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
+            txtStatus.Text = "Select a repository";
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,6 +51,7 @@ namespace SparseApp
             List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
             lstPlugins.DataContext = values;
             txtPluginOutput.Text = "";
+            txtStatus.Text = "Select a plugin";
         }
 
         private void lstPlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
