@@ -19,14 +19,14 @@
             <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Basename}"></TextBlock>
+                        <TextBlock FontSize="15" Margin="5" Text="{Binding Basename}"></TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -35,8 +35,16 @@
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Name="txtStatus" Padding="5" FontSize="14" Background="{DynamicResource AccentColorBrush4}"></TextBlock>
+                <Grid Grid.Row="0" Background="{DynamicResource WhiteBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <controls:ProgressRing Grid.Column="1" Height="16" Width="16"></controls:ProgressRing>
+                    <TextBlock Grid.Column="0" Name="txtStatus" Padding="5" FontSize="14"></TextBlock>
+                </Grid>
                 <TextBox Grid.Row="1" Name="txtPluginOutput" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"
+                     Background="{StaticResource GrayBrush1}" Foreground="{StaticResource WhiteBrush}"
                      BorderThickness="0" VerticalScrollBarVisibility="Auto"></TextBox>
             </Grid>
         </Grid>
