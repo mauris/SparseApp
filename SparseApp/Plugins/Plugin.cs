@@ -50,7 +50,7 @@ namespace SparseApp.Plugins
 
             output = "";
 
-            if (process != null)
+            if (isRunning)
             {
                 try
                 {
