@@ -24,7 +24,8 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="240"></ColumnDefinition>
-                <ColumnDefinition Width="240"></ColumnDefinition>
+                <ColumnDefinition MinWidth="160" Width="240"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
@@ -41,7 +42,8 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Grid.Column="2" Grid.Row="0" Margin="5">
+            <GridSplitter Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="White" ShowsPreview="True" Width="3"></GridSplitter>
+            <Grid Grid.Column="3" Grid.Row="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition></RowDefinition>
