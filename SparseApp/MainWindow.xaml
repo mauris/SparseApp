@@ -23,7 +23,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding Mode=OneWay}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+            <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"></TextBlock>
