@@ -40,7 +40,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="30"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <controls:ProgressRing Grid.Column="1" Height="16" Width="16"></controls:ProgressRing>
+                    <controls:ProgressRing Name="prgProgress" Grid.Column="1" Height="16" Width="16"></controls:ProgressRing>
                     <TextBlock Grid.Column="0" Name="txtStatus" Padding="5" FontSize="14"></TextBlock>
                 </Grid>
                 <TextBox Grid.Row="1" Name="txtPluginOutput" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"

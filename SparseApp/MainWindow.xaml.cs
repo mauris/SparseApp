@@ -91,6 +91,7 @@ namespace SparseApp
             }
 
             txtStatus.Text = "Running...";
+            prgProgress.IsActive = true;
             ThreadStart start = delegate()
             {
                 while (plugin.IsRunning)
@@ -108,6 +109,10 @@ namespace SparseApp
                 Dispatcher.Invoke(
                     DispatcherPriority.Normal,
                     new Action(() => txtStatus.Text = "Ready")
+                );
+                Dispatcher.Invoke(
+                    DispatcherPriority.Normal,
+                    new Action(() => prgProgress.IsActive = false)
                 );
             };
             ConsoleUpdatingThread = new Thread(start);
