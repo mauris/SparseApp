@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace SparseApp.Plugins
 {
@@ -60,14 +61,23 @@ namespace SparseApp.Plugins
 
             process.EnableRaisingEvents = true;
 
-            process.OutputDataReceived += (sender, args) => output += args.Data + "\n";
-            process.ErrorDataReceived += (sender, args) => output += args.Data + "\n";
+            process.OutputDataReceived += (sender, args) => output += processLine(args.Data);
+            process.ErrorDataReceived += (sender, args) => output += processLine(args.Data);
             process.Exited += (sender, args) => isRunning = false;
 
             isRunning = true;
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
+        }
+
+        protected string processLine(string text)
+        {
+            if (text != null)
+            {
+                return Regex.Replace(text, "\u001B\\[[;\\d]*(m|K)", "") + "\n";
+            }
+            return text;
         }
 
         public void Halt()
