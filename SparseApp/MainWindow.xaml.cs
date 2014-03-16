@@ -64,6 +64,12 @@ namespace SparseApp
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 
                 plugin.Run(repository.Path);
+
+                if (this.Width == 480)
+                {
+                    flyOutput.IsOpen = true;
+                }
+
                 RunConsoleUpdating(plugin);
             }
         }
