@@ -63,11 +63,7 @@ namespace SparseApp
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 
-                ThreadStart start = delegate()
-                {
-                    plugin.Run(repository.Path);
-                };
-                new Thread(start).Start();
+                plugin.Run(repository.Path);
                 RunConsoleUpdating(plugin);
             }
         }
