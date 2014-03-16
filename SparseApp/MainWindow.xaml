@@ -8,7 +8,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="16"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -16,22 +16,29 @@
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
+            <ListBox Name="lstRepositories" Grid.Column="0" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Basename}"></TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Mode=OneWay}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+            <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding Mode=OneWay}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"></TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBox Name="txtPluginOutput" Grid.Column="2" Grid.Row="0" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"
-                VerticalScrollBarVisibility="Auto"></TextBox>
+            <Grid Grid.Column="2" Grid.Row="0" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Name="txtStatus" Padding="5" FontSize="14" Background="{DynamicResource AccentColorBrush4}"></TextBlock>
+                <TextBox Grid.Row="1" Name="txtPluginOutput" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"
+                     BorderThickness="0" VerticalScrollBarVisibility="Auto"></TextBox>
+            </Grid>
         </Grid>
     </Grid>
 </controls:MetroWindow>
