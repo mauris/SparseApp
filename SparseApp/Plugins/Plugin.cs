@@ -67,8 +67,8 @@ namespace SparseApp.Plugins
 
             process.EnableRaisingEvents = true;
 
-            process.OutputDataReceived += (sender, args) => output += args.Data;
-            process.ErrorDataReceived += (sender, args) => output += args.Data;
+            process.OutputDataReceived += (sender, args) => output += args.Data + "\n";
+            process.ErrorDataReceived += (sender, args) => output += args.Data + "\n";
             process.Exited += (sender, args) => isRunning = false;
 
             isRunning = true;
