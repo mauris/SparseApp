@@ -90,27 +90,23 @@ namespace SparseApp
                 ConsoleUpdatingThread.Abort();
             }
 
-            txtStatus.Text = "Loading...";
+            txtStatus.Text = "Running...";
             ThreadStart start = delegate()
             {
                 while (plugin.IsRunning)
                 {
                     Dispatcher.Invoke(
-                        DispatcherPriority.Background,
+                        DispatcherPriority.Normal,
                         new Action(() => txtPluginOutput.Text = plugin.Output)
-                    );
-                    Dispatcher.Invoke(
-                        DispatcherPriority.Background,
-                        new Action(() => txtStatus.Text = "Running...")
                     );
                     Thread.Sleep(100);
                 }
                 Dispatcher.Invoke(
-                    DispatcherPriority.Background,
+                    DispatcherPriority.Normal,
                     new Action(() => txtPluginOutput.Text = plugin.Output)
                 );
                 Dispatcher.Invoke(
-                    DispatcherPriority.Background,
+                    DispatcherPriority.Normal,
                     new Action(() => txtStatus.Text = "Ready")
                 );
             };
