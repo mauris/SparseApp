@@ -50,8 +50,10 @@ namespace SparseApp
 
             List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
             lstPlugins.DataContext = values;
+
             txtPluginOutput.Text = "";
             txtStatus.Text = "Select a plugin";
+            lstPlugins.SelectedIndex = -1;
         }
 
         private void lstPlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
