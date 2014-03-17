@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.IO.IsolatedStorage;
 using ProtoBuf;
 
 namespace SparseApp.Repositories
 {
     public class Manager
     {
-        protected string configFile;
-
         protected List<Repository> repositories = new List<Repository>();
+
+        protected const string filename = "repositories";
 
         public List<Repository> Repositories
         {
@@ -21,24 +22,33 @@ namespace SparseApp.Repositories
             }
         }
 
-        public Manager(string file)
+        public Manager()
         {
-            this.configFile = file;
         }
 
         public virtual void LoadRepositories()
         {
-            using (var file = File.OpenRead(this.configFile))
+            repositories = new List<Repository>();
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
             {
-                repositories = Serializer.Deserialize<List<Repository>>(file);
+                if (store.FileExists(filename))
+                {
+                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.Open, FileAccess.Read))
+                    {
+                        repositories = Serializer.Deserialize<List<Repository>>(stream);
+                    }
+                }
             }
         }
 
         public virtual void SaveRepositories()
         {
-            using (var file = File.Create(this.configFile))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
             {
-                Serializer.Serialize(file, repositories);
+                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    Serializer.Serialize(stream, repositories);
+                }
             }
         }
     }
