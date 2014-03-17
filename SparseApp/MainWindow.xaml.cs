@@ -127,6 +127,7 @@ namespace SparseApp
             {
                 item.Value.Halt();
             }
+            repo.SaveRepositories();
         }
     }
 }
