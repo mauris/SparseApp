@@ -33,7 +33,16 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Name="btnAddRepository" Grid.Row="0" Style="{DynamicResource MetroCircleButtonStyle}" Width="50" Height="50">Add</Button>
+                <Button Name="btnAddRepository" Grid.Row="0" HorizontalAlignment="Left" Height="20" Padding="0" BorderThickness="0" Background="White">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Height="12" Width="12">
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource appbar_add}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Padding="2">Add</TextBlock>
+                    </StackPanel>
+                </Button>
                 <ListBox Name="lstRepositories" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
