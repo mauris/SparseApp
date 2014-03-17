@@ -35,10 +35,10 @@ namespace SparseApp
         {
             InitializeComponent();
 
-            plugins = new PluginManager("");
+            plugins = new PluginManager();
             plugins.LoadAvailablePlugins();
 
-            repo = new RepositoryManager("");
+            repo = new RepositoryManager();
             repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
             txtStatus.Text = "Select a repository";
