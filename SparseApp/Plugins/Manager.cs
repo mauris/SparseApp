@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Yaml.Serialization;
 
 namespace SparseApp.Plugins
@@ -28,12 +29,18 @@ namespace SparseApp.Plugins
 
         public virtual void LoadAvailablePlugins()
         {
-            plugins = new Dictionary<String, Plugin>();
-            var serializer = new YamlSerializer();
-            foreach (string file in Directory.EnumerateFiles(folder, "*.yml"))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
             {
-                var plugin = serializer.DeserializeFromFile(file, typeof(Plugin))[0];
-                plugins.Add(Path.GetFileNameWithoutExtension(file), (Plugin)plugin);
+                plugins = new Dictionary<String, Plugin>();
+                var serializer = new YamlSerializer();
+                foreach (string file in store.GetFileNames("*.yml"))
+                {
+                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read))
+                    {
+                        var plugin = serializer.Deserialize(stream, typeof(Plugin))[0];
+                        plugins.Add(Path.GetFileNameWithoutExtension(file), (Plugin)plugin);
+                    }
+                }
             }
         }
     }
