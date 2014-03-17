@@ -10,8 +10,6 @@ namespace SparseApp.Plugins
 {
     public class Manager
     {
-        protected string folder;
-
         protected Dictionary<String, Plugin> plugins = new Dictionary<String, Plugin>();
 
         public Dictionary<String, Plugin> Plugins
@@ -22,16 +20,15 @@ namespace SparseApp.Plugins
             }
         }
 
-        public Manager(string folder)
+        public Manager()
         {
-            this.folder = folder;
         }
 
         public virtual void LoadAvailablePlugins()
         {
+            plugins = new Dictionary<String, Plugin>();
             using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
             {
-                plugins = new Dictionary<String, Plugin>();
                 var serializer = new YamlSerializer();
                 foreach (string file in store.GetFileNames("*.yml"))
                 {

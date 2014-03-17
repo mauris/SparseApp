@@ -7,7 +7,8 @@ namespace SparseApp.Repositories
 {
     public class MockManager : Manager
     {
-        public MockManager():base()
+        public MockManager()
+            : base()
         {
             repositories = new List<Repository>();
 

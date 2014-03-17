@@ -7,8 +7,8 @@ namespace SparseApp.Plugins
 {
     public class MockManager : Manager
     {
-        public MockManager(string folder)
-            : base("")
+        public MockManager()
+            : base()
         {
             plugins.Add("Composer Install", new Plugin { Command = "composer install", Name = "Composer Install" });
             plugins.Add("Composer Update", new Plugin { Command = "composer update", Name = "Composer Update" });
