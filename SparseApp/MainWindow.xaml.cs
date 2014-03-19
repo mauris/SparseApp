@@ -17,6 +17,7 @@ using SparseApp.Repositories;
 using SparseApp.Plugins;
 using System.Threading;
 using System.Windows.Threading;
+using Ookii.Dialogs.Wpf;
 
 namespace SparseApp
 {
@@ -132,7 +133,16 @@ namespace SparseApp
 
         private void btnAddRepository_Click(object sender, RoutedEventArgs e)
         {
+            var dialog = new VistaFolderBrowserDialog();
+            dialog.ShowDialog(this);
 
+            Repository repository = new Repository()
+            {
+                Path = dialog.SelectedPath
+            };
+
+            repo.Repositories.Add(repository);
+            lstRepositories.Items.Refresh();
         }
     }
 }
