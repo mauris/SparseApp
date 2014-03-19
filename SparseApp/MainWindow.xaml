@@ -93,7 +93,10 @@
                 </Grid>
                 <TextBox Grid.Row="1" Name="txtPluginOutput" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"
                      Background="{StaticResource GrayBrush1}" Foreground="{StaticResource WhiteBrush}"
-                     BorderThickness="0" VerticalScrollBarVisibility="Auto"></TextBox>
+                     FontFamily="/SparseApp;component/Resources/#Inconsolata" FontSize="12"
+                     BorderThickness="0" VerticalScrollBarVisibility="Auto">
+                    When plugin runs, the output will be shown here.
+                </TextBox>
             </Grid>
         </Grid>
     </Grid>
