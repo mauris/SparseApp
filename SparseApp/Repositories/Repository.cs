@@ -16,6 +16,11 @@ namespace SparseApp.Repositories
         [ProtoMember(2)]
         public List<string> Plugins { get; set; }
 
+        public Repository()
+        {
+            Plugins = new List<string>();
+        }
+
         public string Basename
         {
             get
