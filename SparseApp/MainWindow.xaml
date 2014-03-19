@@ -47,10 +47,10 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Name="icoRepositoryIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32">
-                    <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_arrow_down}" />
-                    </Rectangle.Fill>
+                <Rectangle Grid.Row="0" Name="icoRepositoryIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32" Fill="{StaticResource AccentColorBrush2}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush  Stretch="Uniform" Visual="{StaticResource appbar_arrow_down}" />
+                    </Rectangle.OpacityMask>
                 </Rectangle>
                 <TextBlock Grid.Row="1" Name="txtRepositoryStatus" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
                     There are no repositories added to Sparse. Click "Add..." to add a repository.
@@ -68,10 +68,10 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Name="icoPluginIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32">
-                    <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-                    </Rectangle.Fill>
+                <Rectangle Grid.Row="0" Name="icoPluginIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32" Fill="{StaticResource AccentColorBrush2}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_arrow_left}" />
+                    </Rectangle.OpacityMask>
                 </Rectangle>
                 <TextBlock Grid.Row="1" Name="txtPluginStatus" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
                     Select a repository on the left to get started.
