@@ -43,6 +43,11 @@ namespace SparseApp
             repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
             txtStatus.Text = "Select a repository";
+
+            if (repo.Repositories.Count > 0)
+            {
+                pnlRepositoryInfo.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)

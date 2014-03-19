@@ -42,6 +42,20 @@
                 </ListBox>
                 <Button Name="btnAddRepository" Grid.Row="1" HorizontalAlignment="Left" Style="{StaticResource MetroFlatButton}" Click="btnAddRepository_Click">Add...</Button>
             </Grid>
+            <Grid Grid.Column="0" Name="pnlRepositoryInfo">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Row="0" Name="icoRepositoryIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_arrow_down}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="1" Name="txtRepositoryStatus" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
+                    There are no repositories added to Sparse. Click "Add..." to add a repository.
+                </TextBlock>
+            </Grid>
             <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
