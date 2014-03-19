@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Unloaded="MetroWindow_Unloaded" ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
-        MinHeight="400" MinWidth="480"
+        MinHeight="400" MinWidth="480" GlowBrush="{StaticResource GrayBrush5}" AllowsTransparency="False"
         Title="Sparse" Height="600" Width="800">
 
     <controls:MetroWindow.Flyouts>
