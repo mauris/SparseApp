@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Unloaded="MetroWindow_Unloaded" ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
-        MinHeight="400" MinWidth="480" GlowBrush="{StaticResource GrayBrush5}" AllowsTransparency="False"
+        MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
         Title="Sparse" Height="600" Width="800">
 
     <controls:MetroWindow.Flyouts>
@@ -33,16 +33,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Name="btnAddRepository" Grid.Row="0" HorizontalAlignment="Left" Height="20" Padding="0" BorderThickness="0" Background="White">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Height="12" Width="12">
-                            <Rectangle.Fill>
-                                <VisualBrush Visual="{StaticResource appbar_add}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Padding="2">Add</TextBlock>
-                    </StackPanel>
-                </Button>
+                <Button Name="btnAddRepository" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource MetroFlatButton}" Click="btnAddRepository_Click">Add...</Button>
                 <ListBox Name="lstRepositories" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

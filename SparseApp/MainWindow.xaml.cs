@@ -129,5 +129,10 @@ namespace SparseApp
             }
             repo.SaveRepositories();
         }
+
+        private void btnAddRepository_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
