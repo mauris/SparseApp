@@ -49,12 +49,21 @@ namespace SparseApp
         {
             Repository repository = (Repository)lstRepositories.SelectedItem;
 
+            pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
+
             List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
             lstPlugins.DataContext = values;
 
             txtPluginOutput.Text = "";
             txtStatus.Text = "Select a plugin";
             lstPlugins.SelectedIndex = -1;
+
+            if (values.Count == 0)
+            {
+                ((VisualBrush)icoPluginIndicator.Fill).Visual = (Visual)FindResource("appbar_puzzle");
+                txtPluginStatus.Text = "This repository has no plugins installed.";
+                pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void lstPlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -49,6 +49,20 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Grid Grid.Column="1" Name="pnlPluginInfo">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Row="0" Name="icoPluginIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="1" Name="txtPluginStatus" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
+                    Select a repository on the left to get started.
+                </TextBlock>
+            </Grid>
             <GridSplitter Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="White" ShowsPreview="True" Width="3"></GridSplitter>
             <Grid Grid.Column="3" Grid.Row="0" Margin="5">
                 <Grid.RowDefinitions>
