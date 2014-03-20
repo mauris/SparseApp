@@ -107,8 +107,8 @@
                     Select a repository on the left to get started.
                     </TextBlock>
                 </Grid>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button Name="btn">
+                <StackPanel Name="pnlPluginActions" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
+                    <Button Name="btnInstallPlugin">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                 <Rectangle.OpacityMask>
@@ -116,6 +116,17 @@
                                 </Rectangle.OpacityMask>
                             </Rectangle>
                             <TextBlock Margin="5,0,0,0">Install</TextBlock>
+                        </StackPanel>
+                    </Button>
+              
+                    <Button Name="btnUninstallPlugin" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_clean}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Margin="5,0,0,0">Remove</TextBlock>
                         </StackPanel>
                     </Button>
                 </StackPanel>
