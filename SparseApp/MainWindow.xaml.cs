@@ -65,9 +65,14 @@ namespace SparseApp
 
             if (values.Count == 0)
             {
+                pnlPluginActions.Visibility = System.Windows.Visibility.Collapsed;
                 ((VisualBrush)icoPluginIndicator.Fill).Visual = (Visual)FindResource("appbar_puzzle");
                 txtPluginStatus.Text = "This repository has no plugins installed.";
                 pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
