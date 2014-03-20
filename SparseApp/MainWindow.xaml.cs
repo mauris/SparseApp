@@ -55,6 +55,7 @@ namespace SparseApp
             Repository repository = (Repository)lstRepositories.SelectedItem;
 
             pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
+            pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
 
             List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
             lstPlugins.DataContext = values;
@@ -65,14 +66,9 @@ namespace SparseApp
 
             if (values.Count == 0)
             {
-                pnlPluginActions.Visibility = System.Windows.Visibility.Collapsed;
                 ((VisualBrush)icoPluginIndicator.OpacityMask).Visual = (Visual)FindResource("appbar_puzzle");
                 txtPluginStatus.Text = "This repository has no plugins installed.";
                 pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
