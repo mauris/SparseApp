@@ -26,8 +26,10 @@
                 <ColumnDefinition Width="240"></ColumnDefinition>
                 <ColumnDefinition MinWidth="160" Width="240"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition MinWidth="160"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
+            <!-- COLUMN 1 -->
             <Grid Grid.Column="0" Grid.Row="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -63,6 +65,8 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            
+            <!-- COLUMN 2 -->
             <Grid Grid.Column="1" Name="pnlPluginInfo">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -77,7 +81,11 @@
                     Select a repository on the left to get started.
                 </TextBlock>
             </Grid>
+
+            <!-- COLUMN 2 / 3 SPLITTER -->
             <GridSplitter Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="White" ShowsPreview="True" Width="3"></GridSplitter>
+
+            <!-- COLUMN 3 -->
             <Grid Grid.Column="3" Grid.Row="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
