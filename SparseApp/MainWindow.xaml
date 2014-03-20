@@ -161,7 +161,7 @@
                                     <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_clean}" />
                                 </Rectangle.OpacityMask>
                             </Rectangle>
-                            <TextBlock Margin="5,0,0,0">Remove</TextBlock>
+                            <TextBlock Margin="5,0,0,0">Uninstall</TextBlock>
                         </StackPanel>
                     </Button>
                 </StackPanel>
