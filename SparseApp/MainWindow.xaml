@@ -69,15 +69,17 @@
                     There are no repositories added to Sparse. Click "Add..." to add a repository.
                 </TextBlock>
             </Grid>
-            <ListBox Name="lstPlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
             
             <!-- COLUMN 2 -->
+            <Grid Grid.Column="1" Grid.Row="0">
+                <ListBox Name="lstPlugins" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
             <Grid Grid.Column="1" Name="pnlPluginInfo">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
