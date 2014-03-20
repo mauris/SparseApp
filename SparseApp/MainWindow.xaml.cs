@@ -88,7 +88,7 @@ namespace SparseApp
 
         private void lstPlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (lstPlugins.SelectedItem != null)
+            if (lstRepositories.SelectedItem != null && lstPlugins.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
@@ -106,7 +106,7 @@ namespace SparseApp
 
         private void lstPlugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lstPlugins.SelectedItem != null)
+            if (lstRepositories.SelectedItem != null && lstPlugins.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
@@ -179,16 +179,20 @@ namespace SparseApp
 
         private async void btnUninstallPlugin_Click(object sender, RoutedEventArgs e)
         {
-            Repository repository = (Repository)lstRepositories.SelectedItem;
-            Plugin plugin = (Plugin)lstPlugins.SelectedItem;
+            if (lstRepositories.SelectedItem != null && lstPlugins.SelectedItem != null)
+            {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
+                Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 
-            var result = await this.ShowMessageAsync("Uninstall Plugin \"" + plugin.Name + "\" from repository", "Are you sure you want to uninstall plugin \"" + plugin.Name + "\" from repository \"" + repository.Basename + "\"?", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
+                var result = await this.ShowMessageAsync("Uninstall Plugin \"" + plugin.Name + "\" from repository", "Are you sure you want to uninstall plugin \"" + plugin.Name + "\" from repository \"" + repository.Basename + "\"?", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
 
-            if(result == MessageDialogResult.Affirmative){
-                string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
-                repository.Plugins.RemoveAll(item => (item == key));
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
+                    repository.Plugins.RemoveAll(item => (item == key));
 
-                lstRepositories_SelectionChanged(sender, null);
+                    lstRepositories_SelectionChanged(sender, null);
+                }
             }
         }
 
@@ -199,7 +203,7 @@ namespace SparseApp
 
         private void mnuRepositoryOpenFolder_Click(object sender, RoutedEventArgs e)
         {
-            if (lstRepositories.SelectedIndex != -1)
+            if (lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Process.Start(repository.Path);
@@ -208,7 +212,7 @@ namespace SparseApp
 
         private void mnuRepositoryRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (lstRepositories.SelectedIndex != -1)
+            if (lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 repo.Repositories.Remove(repository);
