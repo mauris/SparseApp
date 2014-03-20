@@ -219,5 +219,15 @@ namespace SparseApp
                 lstRepositories.Items.Refresh();
             }
         }
+
+        private void mnuPluginRun_Click(object sender, RoutedEventArgs e)
+        {
+            lstPlugins_MouseDoubleClick(sender, null);
+        }
+
+        private void mnuPluginUninstall_Click(object sender, RoutedEventArgs e)
+        {
+            btnUninstallPlugin_Click(sender, e);
+        }
     }
 }

@@ -101,6 +101,20 @@
                     <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ListBox Name="lstPlugins" Grid.Row="0" Margin="0,0,0,5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+                    <ListBox.Resources>
+
+                        <!--Defines a context menu-->
+                        <ContextMenu x:Key="pluginsContextmenu">
+                            <MenuItem Header="Run Plugin" Click="mnuPluginRun_Click"/>
+                            <MenuItem Header="Uninstall" Click="mnuPluginUninstall_Click"/>
+                        </ContextMenu>
+
+                        <!--Sets a context menu for each ListBoxItem in the current ListBox-->
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource pluginsContextmenu}"/>
+                        </Style>
+
+                    </ListBox.Resources>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
