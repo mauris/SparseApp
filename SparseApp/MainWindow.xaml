@@ -50,7 +50,8 @@
 
                         <!--Defines a context menu-->
                         <ContextMenu x:Key="repositoriesContextmenu">
-                            <MenuItem Header="OpenFolder" Click="mnuRepositoryOpenFolder_Click"/>
+                            <MenuItem Header="Open Folder" Click="mnuRepositoryOpenFolder_Click"/>
+                            <MenuItem Header="Remove" Click="mnuRepositoryRemove_Click"/>
                         </ContextMenu>
 
                         <!--Sets a context menu for each ListBoxItem in the current ListBox-->

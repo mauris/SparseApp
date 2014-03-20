@@ -193,5 +193,15 @@ namespace SparseApp
                 Process.Start(repository.Path);
             }
         }
+
+        private void mnuRepositoryRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstRepositories.SelectedIndex != -1)
+            {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
+                repo.Repositories.Remove(repository);
+                lstRepositories.Items.Refresh();
+            }
+        }
     }
 }
