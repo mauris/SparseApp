@@ -19,6 +19,7 @@ using System.Threading;
 using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
 using MahApps.Metro.Controls.Dialogs;
+using System.Diagnostics;
 
 namespace SparseApp
 {
@@ -182,6 +183,15 @@ namespace SparseApp
         private void btnRunPlugin_Click(object sender, RoutedEventArgs e)
         {
             lstPlugins_MouseDoubleClick(sender, null);
+        }
+
+        private void mnuRepositoryOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstRepositories.SelectedIndex != -1)
+            {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
+                Process.Start(repository.Path);
+            }
         }
     }
 }
