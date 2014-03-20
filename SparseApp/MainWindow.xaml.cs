@@ -57,7 +57,6 @@ namespace SparseApp
 
             pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
             pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
-            btnUninstallPlugin.Visibility = System.Windows.Visibility.Collapsed;
 
             List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
             lstPlugins.DataContext = values;
@@ -96,7 +95,6 @@ namespace SparseApp
         {
             if (lstPlugins.SelectedItem != null)
             {
-                btnUninstallPlugin.Visibility = System.Windows.Visibility.Visible;
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 

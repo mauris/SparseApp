@@ -108,6 +108,16 @@
                     </TextBlock>
                 </Grid>
                 <StackPanel Name="pnlPluginActions" Grid.Row="1" Visibility="Collapsed">
+                    <StackPanel.Resources>
+                        <Style x:Key="StackButtonPluginHide" TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=lstPlugins, Path=SelectedIndex}" Value="-1">
+                                    <Setter Property="Button.Visibility" Value="Collapsed"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+                    
                     <Button Name="btnInstallPlugin">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
@@ -118,8 +128,8 @@
                             <TextBlock Margin="5,0,0,0">Install</TextBlock>
                         </StackPanel>
                     </Button>
-              
-                    <Button Name="btnUninstallPlugin" Visibility="Collapsed" Click="btnUninstallPlugin_Click">
+
+                    <Button Name="btnUninstallPlugin" Style="{StaticResource StackButtonPluginHide}" Click="btnUninstallPlugin_Click">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                 <Rectangle.OpacityMask>
