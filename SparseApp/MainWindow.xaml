@@ -79,7 +79,7 @@
                     There are no repositories added to Sparse. Click "Add..." to add a repository.
                     </TextBlock>
                 </Grid>
-                <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="1" Style="{StaticResource StackButtonPanel}">
                     <Button Name="btnAddRepository" Click="btnAddRepository_Click">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
@@ -120,7 +120,7 @@
                     Select a repository on the left to get started.
                     </TextBlock>
                 </Grid>
-                <StackPanel Name="pnlPluginActions" Grid.Row="1" Visibility="Collapsed">
+                <StackPanel Name="pnlPluginActions" Style="{StaticResource StackButtonPanel}" Grid.Row="1" Visibility="Collapsed">
                     <StackPanel.Resources>
                         <Style x:Key="StackButtonPluginHide" TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}">
                             <Style.Triggers>

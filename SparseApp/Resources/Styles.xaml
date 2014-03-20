@@ -3,7 +3,7 @@
     <Style x:Key="StackButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroFlatButton}">
         <Setter Property="Margin" Value="0,0,5,0"/>
     </Style>
-    <Style TargetType="{x:Type StackPanel}">
+    <Style x:Key="StackButtonPanel" TargetType="{x:Type StackPanel}">
         <Style.Resources>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}"></Style>
         </Style.Resources>
