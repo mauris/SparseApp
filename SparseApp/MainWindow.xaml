@@ -67,7 +67,7 @@
                     </TextBlock>
                 </Grid>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button Name="btnAddRepository" HorizontalAlignment="Left" Click="btnAddRepository_Click">Add...</Button>
+                    <Button Name="btnAddRepository" Click="btnAddRepository_Click">Add...</Button>
                 </StackPanel>
             </Grid>
             
@@ -98,6 +98,18 @@
                     Select a repository on the left to get started.
                     </TextBlock>
                 </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Name="btn">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_puzzle}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Margin="5,0,0,0">Install</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
 
             <!-- COLUMN 2 / 3 SPLITTER -->
