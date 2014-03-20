@@ -178,5 +178,10 @@ namespace SparseApp
                 lstRepositories_SelectionChanged(sender, null);
             }
         }
+
+        private void btnRunPlugin_Click(object sender, RoutedEventArgs e)
+        {
+            lstPlugins_MouseDoubleClick(sender, null);
+        }
     }
 }

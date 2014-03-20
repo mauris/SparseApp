@@ -129,6 +129,17 @@
                         </StackPanel>
                     </Button>
 
+                    <Button Name="btnRunPlugin" Style="{StaticResource StackButtonPluginHide}" Click="btnRunPlugin_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_play}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Margin="5,0,0,0">Run</TextBlock>
+                        </StackPanel>
+                    </Button>
+
                     <Button Name="btnUninstallPlugin" Style="{StaticResource StackButtonPluginHide}" Click="btnUninstallPlugin_Click">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
