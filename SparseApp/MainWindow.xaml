@@ -5,7 +5,6 @@
         Unloaded="MetroWindow_Unloaded" ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
         Title="Sparse" Height="600" Width="800">
-
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
             <controls:Flyout Name="flyOutput" Position="Right" Width="380" Theme="Dark" Header="{Binding Path=Text, ElementName=txtStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -67,7 +66,9 @@
                     There are no repositories added to Sparse. Click "Add..." to add a repository.
                     </TextBlock>
                 </Grid>
-                <Button Name="btnAddRepository" Grid.Row="1" HorizontalAlignment="Left" Style="{StaticResource MetroFlatButton}" Click="btnAddRepository_Click">Add...</Button>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Name="btnAddRepository" HorizontalAlignment="Left" Click="btnAddRepository_Click">Add...</Button>
+                </StackPanel>
             </Grid>
             
             <!-- COLUMN 2 -->
