@@ -18,6 +18,7 @@ using SparseApp.Plugins;
 using System.Threading;
 using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace SparseApp
 {
@@ -165,15 +166,19 @@ namespace SparseApp
             }
         }
 
-        private void btnUninstallPlugin_Click(object sender, RoutedEventArgs e)
+        private async void btnUninstallPlugin_Click(object sender, RoutedEventArgs e)
         {
             Repository repository = (Repository)lstRepositories.SelectedItem;
             Plugin plugin = (Plugin)lstPlugins.SelectedItem;
 
-            string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
-            repository.Plugins.RemoveAll(item => (item == key));
+            var result = await this.ShowMessageAsync("Uninstall Plugin \"" + plugin.Name + "\" from repository", "Are you sure you want to uninstall plugin \"" + plugin.Name + "\" from repository \"" + repository.Basename + "\"?", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
 
-            lstRepositories_SelectionChanged(sender, null);
+            if(result == MessageDialogResult.Affirmative){
+                string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
+                repository.Plugins.RemoveAll(item => (item == key));
+
+                lstRepositories_SelectionChanged(sender, null);
+            }
         }
     }
 }
