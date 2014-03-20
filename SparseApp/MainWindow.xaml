@@ -13,6 +13,17 @@
                          TextWrapping="Wrap" AcceptsReturn="True" Margin="5"
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
+            <controls:Flyout Name="flyPluginInstall" Position="Right" Width="380" Theme="Accent" Header="Plugins">
+                <Grid>
+                    <ListBox Name="lstAvailablePlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>
