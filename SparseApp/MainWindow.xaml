@@ -45,7 +45,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListBox Name="lstRepositories" Grid.Row="0" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
+                <ListBox Name="lstRepositories" Grid.Row="0" Margin="0,0,0,5" ItemsSource="{Binding}" SelectionChanged="lstRepositories_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock FontSize="15" Margin="5" Text="{Binding Basename}"></TextBlock>
@@ -81,12 +81,12 @@
             </Grid>
             
             <!-- COLUMN 2 -->
-            <Grid Grid.Column="1" Grid.Row="0">
+            <Grid Grid.Column="1" Grid.Row="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListBox Name="lstPlugins" Margin="5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
+                <ListBox Name="lstPlugins" Grid.Row="0" Margin="0,0,0,5" ItemsSource="{Binding}" SelectionChanged="lstPlugins_SelectionChanged" MouseDoubleClick="lstPlugins_MouseDoubleClick">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
