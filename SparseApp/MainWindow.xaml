@@ -119,7 +119,7 @@
                         </StackPanel>
                     </Button>
               
-                    <Button Name="btnUninstallPlugin" Visibility="Collapsed">
+                    <Button Name="btnUninstallPlugin" Visibility="Collapsed" Click="btnUninstallPlugin_Click">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                 <Rectangle.OpacityMask>

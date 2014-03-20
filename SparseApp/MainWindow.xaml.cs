@@ -164,5 +164,16 @@ namespace SparseApp
                 lstRepositories.Items.Refresh();
             }
         }
+
+        private void btnUninstallPlugin_Click(object sender, RoutedEventArgs e)
+        {
+            Repository repository = (Repository)lstRepositories.SelectedItem;
+            Plugin plugin = (Plugin)lstPlugins.SelectedItem;
+
+            string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
+            repository.Plugins.RemoveAll(item => (item == key));
+
+            lstRepositories_SelectionChanged(sender, null);
+        }
     }
 }
