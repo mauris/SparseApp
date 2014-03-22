@@ -161,7 +161,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
             if (result == true)
             {
-                if (repo.Repositories.Select(repository => repository.Path == dialog.SelectedPath).Count() == 0)
+                if (repo.Repositories.Where(repository => repository.Path == dialog.SelectedPath).Count() == 0)
                 {
                     Repository repository = new Repository()
                     {
