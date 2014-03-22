@@ -171,13 +171,20 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
             if (result == true)
             {
-                Repository repository = new Repository()
+                if (repo.Repositories.Select(repository => repository.Path == dialog.SelectedPath).Count() == 0)
                 {
-                    Path = dialog.SelectedPath
-                };
+                    Repository repository = new Repository()
+                    {
+                        Path = dialog.SelectedPath
+                    };
 
-                repo.Repositories.Add(repository);
-                lstRepositories.Items.Refresh();
+                    repo.Repositories.Add(repository);
+                    lstRepositories.Items.Refresh();
+                }
+                else
+                {
+                    this.ShowMessageAsync("Repository already exists", "The selected folder \"" + dialog.SelectedPath + "\" has already been registered in Sparse.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "OK" });
+                }
             }
         }
 
