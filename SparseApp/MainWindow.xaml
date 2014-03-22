@@ -73,6 +73,9 @@
 
                 </Grid>
             </controls:Flyout>
+            <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="380" Theme="Accent" Header="Add Plugin" IsModal="True">
+                
+            </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>
