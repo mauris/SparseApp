@@ -241,7 +241,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             btnUninstallPlugin_Click(sender, e);
         }
 
-        private void btnInstallPlugin_Click(object sender, RoutedEventArgs e)
+        private void btnManagePlugins_Click(object sender, RoutedEventArgs e)
         {
             flyPluginManager.IsOpen = true;
         }

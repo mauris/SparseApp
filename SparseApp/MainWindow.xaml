@@ -19,7 +19,7 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="30"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <ListBox Name="lstAvailablePlugins" Grid.Row="0" Margin="0,0,0,5" ItemsSource="{Binding}">
+                    <ListBox Name="lstAvailablePlugins" Grid.Row="0" Margin="0,0,0,5" ItemsSource="{Binding}" MouseDoubleClick="lstAvailablePlugins_MouseDoubleClick">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock FontSize="13" Margin="5" Text="{Binding Value.Name}"></TextBlock>
@@ -269,15 +269,15 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Resources>
-                    
-                    <Button Name="btnInstallPlugin" Click="btnInstallPlugin_Click">
+
+                    <Button Name="btnManagePlugins" Click="btnManagePlugins_Click">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                 <Rectangle.OpacityMask>
                                     <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_puzzle}" />
                                 </Rectangle.OpacityMask>
                             </Rectangle>
-                            <TextBlock Margin="5,0,0,0">Install</TextBlock>
+                            <TextBlock Margin="5,0,0,0">Manage</TextBlock>
                         </StackPanel>
                     </Button>
 
