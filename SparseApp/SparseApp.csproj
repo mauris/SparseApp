@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Mono.Options\Options.cs" />
     <Compile Include="Plugins\Manager.cs" />
     <Compile Include="Plugins\MockManager.cs" />
     <Compile Include="Plugins\Plugin.cs" />
