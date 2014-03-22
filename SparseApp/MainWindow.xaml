@@ -14,13 +14,63 @@
             </controls:Flyout>
             <controls:Flyout Name="flyPluginInstall" Position="Right" Width="380" Theme="Accent" Header="Plugins" IsModal="True">
                 <Grid>
-                    <ListBox Name="lstAvailablePlugins" Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListBox Name="lstAvailablePlugins" Grid.Row="0" Margin="5" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
+                    <StackPanel Name="pnlPluginInstallerActions" Style="{StaticResource StackButtonPanel}" Grid.Row="1" Visibility="Collapsed">
+                        <StackPanel.Resources>
+                            <Style x:Key="StackButtonPluginHide" TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=lstAvailablePlugins, Path=SelectedIndex}" Value="-1">
+                                        <Setter Property="Button.Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <Button Name="btnAddPlugin">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_add}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Margin="5,0,0,0">Add Plugin</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource StackButtonPluginHide}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_puzzle}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Margin="5,0,0,0">Install</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource StackButtonPluginHide}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_clean}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Margin="5,0,0,0">Remove</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
                 </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
