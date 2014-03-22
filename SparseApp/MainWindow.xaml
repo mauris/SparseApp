@@ -154,12 +154,13 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Grid Grid.Row="0" Name="pnlRepositoryInfo" Visibility="Collapsed">
+                <Grid Grid.Row="0" Name="pnlRepositoryInfo">
                     <Grid.Style>
-                        <Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=lstRepositories, Path=Items.Count}" Value="0">
-                                    <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                    <Setter Property="Grid.Visibility" Value="Visible"></Setter>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
