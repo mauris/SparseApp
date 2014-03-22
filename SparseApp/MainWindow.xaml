@@ -25,6 +25,31 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    
+                    <Grid Grid.Row="0">
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=lstAvailablePlugins, Path=Items.Count}" Value="0">
+                                        <Setter Property="Grid.Visibility" Value="Visible"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32" Fill="{StaticResource AccentColorBrush2}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush  Stretch="Uniform" Visual="{StaticResource appbar_puzzle}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Grid.Row="1" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
+                            Sparse has no plugins yet. You can add one by clicking the "Add Plugin" button below.
+                        </TextBlock>
+                    </Grid>
 
                     <StackPanel Name="pnlPluginInstallerActions" Style="{StaticResource StackButtonPanel}" Grid.Row="1">
                         <StackPanel.Resources>
@@ -154,7 +179,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Grid Grid.Row="0" Name="pnlRepositoryInfo">
+                <Grid Grid.Row="0">
                     <Grid.Style>
                         <Style TargetType="{x:Type Grid}">
                             <Setter Property="Visibility" Value="Collapsed"></Setter>
@@ -169,12 +194,12 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Rectangle Grid.Row="0" Name="icoRepositoryIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32" Fill="{StaticResource AccentColorBrush2}">
+                    <Rectangle Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32" Fill="{StaticResource AccentColorBrush2}">
                         <Rectangle.OpacityMask>
                             <VisualBrush  Stretch="Uniform" Visual="{StaticResource appbar_arrow_down}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Grid.Row="1" Name="txtRepositoryStatus" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" TextAlignment="Center" Margin="20 5" FontSize="16" Foreground="{StaticResource GrayBrush3}">
                     There are no repositories added to Sparse. Click "Add..." to add a repository.
                     </TextBlock>
                 </Grid>
