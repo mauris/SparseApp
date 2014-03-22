@@ -394,5 +394,13 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             btnTools.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
             btnTools.ContextMenu.IsOpen = true;
         }
+
+        private void btnAddPluginDropDown_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            btnAddPlugin.ContextMenu.PlacementTarget = btnAddPlugin;
+            btnAddPlugin.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            btnAddPlugin.ContextMenu.IsOpen = true;
+        }
     }
 }
