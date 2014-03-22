@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using RepositoryManager = SparseApp.Repositories.MockManager;
 using PluginManager = SparseApp.Plugins.MockManager;
 using SparseApp.Repositories;
@@ -20,6 +19,8 @@ using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
 using MahApps.Metro.Controls.Dialogs;
 using System.Diagnostics;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SparseApp
 {
@@ -316,7 +317,35 @@ You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "rep
 
         private void btnFormAddPlugin_Click(object sender, RoutedEventArgs e)
         {
-            btnFormAddPluginCancel_Click(sender, e);
+            bool validate = true;
+
+            if (txtPluginAddName.Text.Trim() == "")
+            {
+                validate = false;
+            }
+
+            if (txtPluginAddCommand.Text.Trim() == "")
+            {
+                validate = false;
+            }
+
+            if (validate)
+            {
+                Plugin plugin = new Plugin()
+                {
+                    Name = txtPluginAddName.Text.Trim(),
+                    Command = txtPluginAddCommand.Text.Trim()
+                };
+
+                string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+                Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
+                string filename = r.Replace(plugin.Name, "");
+
+                plugins.AddPlugin(filename, plugin);
+                lstAvailablePlugins.Items.Refresh();
+
+                btnFormAddPluginCancel_Click(sender, e);
+            }
         }
 
         private void btnFormAddPluginCancel_Click(object sender, RoutedEventArgs e)
