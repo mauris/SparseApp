@@ -244,7 +244,7 @@ You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "rep
 
         private void btnInstallPlugin_Click(object sender, RoutedEventArgs e)
         {
-            flyPluginInstall.IsOpen = true;
+            flyPluginManager.IsOpen = true;
         }
 
         private void btnFlyInstallPlugin_Click(object sender, RoutedEventArgs e)
@@ -308,6 +308,11 @@ You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "rep
                     lstPlugins.DataContext = values;
                 }
             }
+        }
+
+        private void btnAddPlugin_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

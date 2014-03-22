@@ -12,7 +12,7 @@
                          TextWrapping="Wrap" AcceptsReturn="True" Margin="5"
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
-            <controls:Flyout Name="flyPluginInstall" Position="Right" Width="380" Theme="Accent" Header="Plugins" IsModal="True">
+            <controls:Flyout Name="flyPluginManager" Position="Right" Width="380" Theme="Accent" Header="Plugins" IsModal="True">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -37,7 +37,7 @@
                             </Style>
                         </StackPanel.Resources>
 
-                        <Button Name="btnAddPlugin">
+                        <Button Name="btnAddPlugin" Click="btnAddPlugin_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                     <Rectangle.OpacityMask>
