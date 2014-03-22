@@ -13,7 +13,9 @@ Currently still a work-in-progress. More features such as  drag-drop will be com
 
 22 Mar 2014 screenshots.
 
-
+![](http://i.imgur.com/Da0nR1Y.png)
+![](http://i.imgur.com/FtK90n9.png)
+![](http://i.imgur.com/k29sZav.png)
 
 ## License
 
