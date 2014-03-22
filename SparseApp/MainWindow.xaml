@@ -88,12 +88,27 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" FontSize="16">Name of the Plugin</TextBlock>
-                    <TextBox Grid.Row="1" controls:TextboxHelper.Watermark="Plugin's Name"></TextBox>
+                    <TextBox Grid.Row="1" Name="txtPluginAddName" controls:TextboxHelper.Watermark="Plugin's Name"></TextBox>
                     <TextBlock Grid.Row="2" FontSize="16">Command (include arguments)</TextBlock>
-                    <TextBox Grid.Row="3" controls:TextboxHelper.Watermark="Plugin's Command"></TextBox>
+                    <TextBox Grid.Row="3" Name="txtPluginAddCommand" controls:TextboxHelper.Watermark="Plugin's Command"></TextBox>
+                    <StackPanel Style="{StaticResource StackButtonPanel}" Grid.Row="4">
+                        <Button Name="btnFormAddPlugin" Click="btnFormAddPlugin_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_add}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Margin="5,0,0,0">Add Plugin</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="btnFormAddPluginCancel" Click="btnFormAddPluginCancel_Click">Cancel</Button>
+                    </StackPanel>
                 </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
