@@ -89,13 +89,8 @@
                                 </ContextMenu>
                             </Button.ContextMenu>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}" Margin="5">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_add}" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                                <TextBlock Margin="5,0,0,0">Add Plugin</TextBlock>
-                                <Button Margin="5,0,0,0" Padding="0" Name="btnAddPluginDropDown" Click="btnAddPluginDropDown_Click">
+                                <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">Add Plugin</TextBlock>
+                                <Button Margin="5,0,0,0" Padding="0" Height="30" Name="btnAddPluginDropDown" Click="btnAddPluginDropDown_Click">
                                     <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="6" Width="6" Fill="{StaticResource GrayBrush1}" Margin="5">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_chevron_down}" />
