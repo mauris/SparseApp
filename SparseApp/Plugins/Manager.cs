@@ -27,39 +27,43 @@ namespace SparseApp.Plugins
         public virtual void AddPlugin(string name, Plugin plugin)
         {
             plugins.Add(name, plugin);
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 var serializer = new YamlSerializer();
-                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(name + ".yml", FileMode.OpenOrCreate, FileAccess.Write))
+                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(name + ".yml", FileMode.OpenOrCreate, FileAccess.Write, store))
                 {
                     serializer.Serialize(stream, plugin);
+                    stream.Close();
                 }
+                store.Close();
             }
         }
 
         public virtual void RemovePlugin(string name)
         {
             plugins.Remove(name);
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 store.DeleteFile(name + ".yml");
+                store.Close();
             }
         }
 
         public virtual void LoadAvailablePlugins()
         {
             plugins = new Dictionary<String, Plugin>();
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 var serializer = new YamlSerializer();
                 foreach (string file in store.GetFileNames("*.yml"))
                 {
-                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read))
+                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read, store))
                     {
                         var plugin = serializer.Deserialize(stream, typeof(Plugin))[0];
                         plugins.Add(Path.GetFileNameWithoutExtension(file), (Plugin)plugin);
                     }
                 }
+                store.Close();
             }
         }
     }

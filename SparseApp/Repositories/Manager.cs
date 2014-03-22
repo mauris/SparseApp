@@ -29,26 +29,29 @@ namespace SparseApp.Repositories
         public virtual void LoadRepositories()
         {
             repositories = new List<Repository>();
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 if (store.FileExists(filename))
                 {
-                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.Open, FileAccess.Read))
+                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.Open, FileAccess.Read, store))
                     {
                         repositories = Serializer.Deserialize<List<Repository>>(stream);
                     }
                 }
+                store.Close();
             }
         }
 
         public virtual void SaveRepositories()
         {
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.OpenOrCreate, FileAccess.Write))
+                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, store))
                 {
                     Serializer.Serialize(stream, repositories);
+                    stream.Close();
                 }
+                store.Close();
             }
         }
     }
