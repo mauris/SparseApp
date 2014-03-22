@@ -3,17 +3,17 @@
 
 1. Register your repositories and work folders
 2. Install plugins for your repositories
-3. Double click on the plugins
+3. Double click on the plugin to run
 4. ???
 5. PROFIT!!!
 
-Currently still a work-in-progress. More features such as plugins and drag-drop will be accomplished pretty soon. Stay tuned.
+Currently still a work-in-progress. More features such as  drag-drop will be completed pretty soon. Stay tuned.
 
 ##Screenshots
 
-Disclaimer: The screenshots may not reflect actual product. 
+22 Mar 2014 screenshots.
 
-![](http://i.imgur.com/eLpV9Kq.png) ![](http://i.imgur.com/kfjW6z0.png)
+
 
 ## License
 

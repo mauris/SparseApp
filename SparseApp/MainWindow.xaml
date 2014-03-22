@@ -75,6 +75,14 @@
             </controls:Flyout>
             <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="400" Theme="Adapt" Header="Add Plugin" IsModal="True">
                 <Grid Margin="5px">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="0,0,0,5"></Setter>
+                        </Style>
+                        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}">
+                            <Setter Property="Margin" Value="0,0,0,15"></Setter>
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
