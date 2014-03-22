@@ -191,7 +191,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                     string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
                     repository.Plugins.RemoveAll(item => (item == key));
 
-                    lstRepositories_SelectionChanged(sender, null);
+                    RefreshPluginsForRepository(repository);
                 }
             }
         }
@@ -360,7 +360,6 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                 if (repository.Plugins.Count(item => item == entry.Key) == 0)
                 {
                     repository.Plugins.Add(entry.Key);
-
                 }
                 else
                 {
