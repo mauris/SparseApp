@@ -261,7 +261,7 @@
                      Background="{StaticResource GrayBrush1}" Foreground="{StaticResource WhiteBrush}"
                      FontFamily="/SparseApp;component/Resources/#Inconsolata" FontSize="12"
                      BorderThickness="0" VerticalScrollBarVisibility="Auto">
-                    When plugin runs, the output will be shown here.
+
                 </TextBox>
             </Grid>
         </Grid>

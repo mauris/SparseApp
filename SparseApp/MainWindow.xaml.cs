@@ -46,6 +46,23 @@ namespace SparseApp
             repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
             txtStatus.Text = "Select a repository";
+
+            SetWelcomeText();
+        }
+
+        private void SetWelcomeText()
+        {
+            txtPluginOutput.Text = @"Welcome to Sparse.
+   ____                     
+  / __/__  ___ ________ ___ 
+ _\ \/ _ \/ _ `/ __(_-</ -_)
+/___/ .__/\_,_/_/ /___/\__/ 
+   /_/                      
+
+When plugin runs, the output will be shown here.
+
+You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "repositories" : "repository") + " registered and "
+           + plugins.Plugins.Count + " " + (plugins.Plugins.Count > 1 ? "plugins" : "plugin") + " available.";
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
