@@ -313,5 +313,15 @@ You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "rep
         {
             flyPluginInstaller.IsOpen = true;
         }
+
+        private void btnFormAddPlugin_Click(object sender, RoutedEventArgs e)
+        {
+            btnFormAddPluginCancel_Click(sender, e);
+        }
+
+        private void btnFormAddPluginCancel_Click(object sender, RoutedEventArgs e)
+        {
+            flyPluginInstaller.IsOpen = false;
+        }
     }
 }
