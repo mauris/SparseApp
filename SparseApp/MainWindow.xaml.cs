@@ -164,15 +164,6 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             ConsoleUpdatingThread.Start();
         }
 
-        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            foreach (KeyValuePair<string, Plugin> item in plugins.Plugins)
-            {
-                item.Value.Halt();
-            }
-            repo.SaveRepositories();
-        }
-
         private void btnAddRepository_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new VistaFolderBrowserDialog();
@@ -351,6 +342,15 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
         private void btnFormAddPluginCancel_Click(object sender, RoutedEventArgs e)
         {
             flyPluginInstaller.IsOpen = false;
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (KeyValuePair<string, Plugin> item in plugins.Plugins)
+            {
+                item.Value.Halt();
+            }
+            repo.SaveRepositories();
         }
     }
 }

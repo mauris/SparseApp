@@ -2,8 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Unloaded="MetroWindow_Unloaded" ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
+        ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
+                      Closing="MetroWindow_Closing"
         Title="Sparse" Height="600" Width="800">
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
