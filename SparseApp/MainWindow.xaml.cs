@@ -342,6 +342,8 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
         private void btnFormAddPluginCancel_Click(object sender, RoutedEventArgs e)
         {
             flyPluginInstaller.IsOpen = false;
+            txtPluginAddCommand.Text = "";
+            txtPluginAddName.Text = "";
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
