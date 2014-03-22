@@ -62,8 +62,8 @@ namespace SparseApp
 
 When plugin runs, the output will be shown here.
 
-You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "repositories" : "repository") + " registered and "
-           + plugins.Plugins.Count + " " + (plugins.Plugins.Count > 1 ? "plugins" : "plugin") + " available.";
+You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToString()) + " " + (repo.Repositories.Count == 1 ? "repositories" : "repository") + " registered and "
+           + (plugins.Plugins.Count == 0 ? "no" : plugins.Plugins.Count.ToString()) + " " + (plugins.Plugins.Count == 1 ? "plugins" : "plugin") + " available.";
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
