@@ -26,7 +26,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <StackPanel Name="pnlPluginInstallerActions" Style="{StaticResource StackButtonPanel}" Grid.Row="1" Visibility="Collapsed">
+                    <StackPanel Name="pnlPluginInstallerActions" Style="{StaticResource StackButtonPanel}" Margin="5" Grid.Row="1">
                         <StackPanel.Resources>
                             <Style x:Key="StackButtonPluginHide" TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}">
                                 <Style.Triggers>
@@ -48,7 +48,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Button Style="{StaticResource StackButtonPluginHide}">
+                        <Button Name="btnFlyInstallPlugin" Click="btnFlyInstallPlugin_Click" Style="{StaticResource StackButtonPluginHide}">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                     <Rectangle.OpacityMask>

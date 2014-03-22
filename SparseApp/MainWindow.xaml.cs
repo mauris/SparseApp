@@ -229,5 +229,26 @@ namespace SparseApp
         {
             flyPluginInstall.IsOpen = true;
         }
+
+        private void btnFlyInstallPlugin_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstAvailablePlugins.SelectedItem != null && lstRepositories.SelectedItem != null)
+            {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
+                KeyValuePair<string, Plugin> entry = (KeyValuePair<string, Plugin>)lstAvailablePlugins.SelectedItem;
+                if (repository.Plugins.Count(item => item == entry.Key) == 0)
+                {
+                    repository.Plugins.Add(entry.Key);
+
+                    List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+                    lstPlugins.DataContext = values;
+
+                }
+                else
+                {
+                    // show message that plugin has already been installed.
+                }
+            }
+        }
     }
 }
