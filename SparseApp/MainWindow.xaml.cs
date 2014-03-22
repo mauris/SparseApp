@@ -312,7 +312,7 @@ You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "rep
 
         private void btnAddPlugin_Click(object sender, RoutedEventArgs e)
         {
-
+            flyPluginInstaller.IsOpen = true;
         }
     }
 }

@@ -12,7 +12,7 @@
                          TextWrapping="Wrap" AcceptsReturn="True" Margin="5"
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
-            <controls:Flyout Name="flyPluginManager" Position="Right" Width="380" Theme="Accent" Header="Plugins" IsModal="True">
+            <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Inverse" Header="Plugins" IsModal="True">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -73,8 +73,16 @@
 
                 </Grid>
             </controls:Flyout>
-            <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="380" Theme="Accent" Header="Add Plugin" IsModal="True">
-                
+            <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="400" Theme="Dark" Header="Add Plugin" IsModal="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Name of the Plugin</TextBlock>
+                    <TextBox Grid.Row="1" controls:TextboxHelper.Watermark="Plugin's Name"></TextBox>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
