@@ -33,7 +33,8 @@ namespace SparseApp.Repositories
             {
                 if (store.FileExists(filename))
                 {
-                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.Open, FileAccess.Read, store))
+                    store.DeleteFile(filename);
+                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.Create, FileAccess.Read, store))
                     {
                         repositories = Serializer.Deserialize<List<Repository>>(stream);
                     }
