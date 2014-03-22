@@ -20,6 +20,11 @@ namespace SparseApp.Plugins
         {
         }
 
+        public override void AddPlugin(string name, Plugin plugin)
+        {
+            plugins.Add(name, plugin);
+        }
+
         public override void RemovePlugin(string name)
         {
             plugins.Remove(name);

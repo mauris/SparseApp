@@ -24,6 +24,19 @@ namespace SparseApp.Plugins
         {
         }
 
+        public virtual void AddPlugin(string name, Plugin plugin)
+        {
+            plugins.Add(name, plugin);
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            {
+                var serializer = new YamlSerializer();
+                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(name + ".yml", FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    serializer.Serialize(stream, plugin);
+                }
+            }
+        }
+
         public virtual void RemovePlugin(string name)
         {
             plugins.Remove(name);
