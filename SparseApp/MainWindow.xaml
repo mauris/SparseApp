@@ -12,7 +12,7 @@
                          TextWrapping="Wrap" AcceptsReturn="True" Margin="5"
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
-            <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Inverse" Header="Plugins" IsModal="True">
+            <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Adapt" Header="Plugins" IsModal="True">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -73,15 +73,19 @@
 
                 </Grid>
             </controls:Flyout>
-            <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="400" Theme="Dark" Header="Add Plugin" IsModal="True">
-                <Grid>
+            <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="400" Theme="Adapt" Header="Add Plugin" IsModal="True">
+                <Grid Margin="5px">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0">Name of the Plugin</TextBlock>
+                    <TextBlock Grid.Row="0" FontSize="16">Name of the Plugin</TextBlock>
                     <TextBox Grid.Row="1" controls:TextboxHelper.Watermark="Plugin's Name"></TextBox>
+                    <TextBlock Grid.Row="2" FontSize="16">Command (include arguments)</TextBlock>
+                    <TextBox Grid.Row="3" controls:TextboxHelper.Watermark="Plugin's Command"></TextBox>
                 </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
