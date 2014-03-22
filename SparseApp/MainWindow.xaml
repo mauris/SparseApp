@@ -6,6 +6,25 @@
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
                       Closing="MetroWindow_Closing"
         Title="Sparse" Height="600" Width="800">
+    <controls:MetroWindow.WindowCommands>
+        <controls:WindowCommands>
+            <Button Name="btnTools" Click="btnTools_Click" ContextMenuService.Placement="Bottom">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="About Sparse" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_settings}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="5,0,0,0">tools</TextBlock>
+                </StackPanel>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.WindowCommands>
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
             <controls:Flyout Name="flyOutput" Position="Right" Width="380" Theme="Dark" Header="{Binding Path=Text, ElementName=txtStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

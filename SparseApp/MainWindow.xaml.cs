@@ -389,6 +389,12 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                 pnlPluginActions.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
+
+        private void btnTools_Click(object sender, RoutedEventArgs e)
+        {
+            btnTools.ContextMenu.PlacementTarget = btnTools;
+            btnTools.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            btnTools.ContextMenu.IsOpen = true;
         }
     }
 }
