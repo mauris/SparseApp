@@ -78,6 +78,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             }
             else
             {
+                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
                 Repository repository = (Repository)lstRepositories.SelectedItem;
 
                 txtPluginOutput.Text = "";
@@ -378,14 +379,12 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             if (values.Count > 0)
             {
                 pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
-                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
                 ((VisualBrush)icoPluginIndicator.OpacityMask).Visual = (Visual)FindResource("appbar_puzzle");
                 txtPluginStatus.Text = "This repository has no plugins installed.";
                 pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
-                pnlPluginActions.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
