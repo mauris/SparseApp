@@ -15,11 +15,15 @@ namespace SparseApp
         {
             bool reset = false;
             OptionSet set = new OptionSet()
+                .Add("reset", v => reset = v != null);
+
+            try
             {
-               {
-                   "reset", "Reset all storage used by Sparse.", v => reset = v != null
-               }
-            };
+                set.Parse(args);
+            }
+            catch (OptionException)
+            {
+            }
 
             if (reset)
             {
