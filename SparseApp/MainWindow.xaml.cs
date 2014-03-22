@@ -40,7 +40,7 @@ namespace SparseApp
 
             plugins = new PluginManager();
             plugins.LoadAvailablePlugins();
-            lstAvailablePlugins.DataContext = plugins.Plugins;
+            lstAvailablePlugins.DataContext = plugins.Plugins.Values.ToList();
 
             repo = new RepositoryManager();
             repo.LoadRepositories();
@@ -223,6 +223,11 @@ namespace SparseApp
         private void mnuPluginUninstall_Click(object sender, RoutedEventArgs e)
         {
             btnUninstallPlugin_Click(sender, e);
+        }
+
+        private void btnInstallPlugin_Click(object sender, RoutedEventArgs e)
+        {
+            flyPluginInstall.IsOpen = true;
         }
     }
 }
