@@ -40,7 +40,7 @@ namespace SparseApp
 
             plugins = new PluginManager();
             plugins.LoadAvailablePlugins();
-            lstAvailablePlugins.DataContext = plugins.Plugins.Values.ToList();
+            lstAvailablePlugins.DataContext = plugins.Plugins;
 
             repo = new RepositoryManager();
             repo.LoadRepositories();

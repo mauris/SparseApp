@@ -21,7 +21,7 @@
                     <ListBox Name="lstAvailablePlugins" Grid.Row="0" Margin="5" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock FontSize="13" Margin="5" Text="{Binding Name}"></TextBlock>
+                                <TextBlock FontSize="13" Margin="5" Text="{Binding Value.Name}"></TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
