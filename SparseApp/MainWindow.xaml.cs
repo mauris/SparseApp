@@ -259,11 +259,10 @@ You have " + repo.Repositories.Count + " " + (repo.Repositories.Count > 1 ? "rep
 
                     List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
                     lstPlugins.DataContext = values;
-
                 }
                 else
                 {
-                    // show message that plugin has already been installed.
+                    this.ShowMessageAsync("Plugin already installed", "The plugin \"" + entry.Value.Name + "\" has already been installed to the repository.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "OK" });
                 }
             }
         }
