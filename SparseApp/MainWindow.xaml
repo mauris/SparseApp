@@ -66,7 +66,16 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Grid Grid.Row="0" Name="pnlRepositoryInfo">
+                <Grid Grid.Row="0" Name="pnlRepositoryInfo" Visibility="Collapsed">
+                    <Grid.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=lstRepositories, Path=Items.Count}" Value="0">
+                                    <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -146,7 +155,7 @@
                         </Style>
                     </StackPanel.Resources>
                     
-                    <Button Name="btnInstallPlugin">
+                    <Button Name="btnInstallPlugin" Click="btnInstallPlugin_Click">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                 <Rectangle.OpacityMask>

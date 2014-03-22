@@ -40,16 +40,12 @@ namespace SparseApp
 
             plugins = new PluginManager();
             plugins.LoadAvailablePlugins();
+            lstAvailablePlugins.DataContext = plugins.Plugins;
 
             repo = new RepositoryManager();
             repo.LoadRepositories();
             lstRepositories.DataContext = repo.Repositories;
             txtStatus.Text = "Select a repository";
-
-            if (repo.Repositories.Count > 0)
-            {
-                pnlRepositoryInfo.Visibility = System.Windows.Visibility.Collapsed;
-            }
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,7 +60,6 @@ namespace SparseApp
             }
             else
             {
-
                 Repository repository = (Repository)lstRepositories.SelectedItem;
 
                 pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
