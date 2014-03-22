@@ -41,34 +41,42 @@ namespace SparseApp.Plugins
 
         public void Run(string path)
         {
-            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + Command);
-
-            procStartInfo.RedirectStandardOutput = true;
-            procStartInfo.UseShellExecute = false;
-            procStartInfo.WorkingDirectory = path;
-            procStartInfo.CreateNoWindow = true;
-            procStartInfo.RedirectStandardError = true;
-
-            if (isRunning)
+            try
             {
-                process.Kill();
+                ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + Command);
+
+                procStartInfo.RedirectStandardOutput = true;
+                procStartInfo.UseShellExecute = false;
+                procStartInfo.WorkingDirectory = path;
+                procStartInfo.CreateNoWindow = true;
+                procStartInfo.RedirectStandardError = true;
+
+                if (isRunning)
+                {
+                    process.Kill();
+                }
+
+                output = "";
+
+                process = new Process();
+                process.StartInfo = procStartInfo;
+
+                process.EnableRaisingEvents = true;
+
+                process.OutputDataReceived += (sender, args) => output += processLine(args.Data);
+                process.ErrorDataReceived += (sender, args) => output += processLine(args.Data);
+                process.Exited += (sender, args) => isRunning = false;
+
+                isRunning = true;
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
             }
-
-            output = "";
-
-            process = new Process();
-            process.StartInfo = procStartInfo;
-
-            process.EnableRaisingEvents = true;
-
-            process.OutputDataReceived += (sender, args) => output += processLine(args.Data);
-            process.ErrorDataReceived += (sender, args) => output += processLine(args.Data);
-            process.Exited += (sender, args) => isRunning = false;
-
-            isRunning = true;
-            process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+            catch (Exception ex)
+            {
+                output = "Exception occurred. Tried running the following command:\n\n> " + Command + "\nat " + path + "\n\nPlease review the following exception message:\n\n" + ex.Message + "\n\nStack Trace:\n" + ex.StackTrace;
+                isRunning = false;
+            }
         }
 
         protected string processLine(string text)
