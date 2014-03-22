@@ -250,5 +250,47 @@ namespace SparseApp
                 }
             }
         }
+
+        private async void btnFlyRemovePlugin_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstAvailablePlugins.SelectedItem != null)
+            {
+                KeyValuePair<string, Plugin> entry = (KeyValuePair<string, Plugin>)lstAvailablePlugins.SelectedItem;
+                List<Repository> inUseRepos = new List<Repository>();
+
+                // do check for repositories that are using this plugin
+                foreach (Repository repository in repo.Repositories)
+                {
+                    if (repository.Plugins.Contains(entry.Key))
+                    {
+                        inUseRepos.Add(repository);
+                    }
+                }
+
+                string message = "Are you sure you want to totally remove plugin \"" + entry.Value.Name + "\" from Sparse?";
+                if (inUseRepos.Count > 0)
+                {
+                    message += "\n\nWarning: This plugin has been installed to " + inUseRepos.Count + " " + (inUseRepos.Count > 1 ? "repositories" : "repository") + ". Removing the plugin will uninstall it from these repositories";
+                }
+
+                var result = await this.ShowMessageAsync("Remove Plugin \"" + entry.Value.Name + "\" from Sparse", message, MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    // uninstall the plugin from all repos
+                    foreach (Repository repository in inUseRepos)
+                    {
+                        repository.Plugins.RemoveAll(item => item == entry.Key);
+                    }
+                    plugins.RemovePlugin(entry.Key); // remove plugin
+                    lstAvailablePlugins.Items.Refresh(); // refresh view
+
+                    // refresh plugins for current repo
+                    Repository currentRepo = (Repository)lstRepositories.SelectedItem;
+                    List<Plugin> values = plugins.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+                    lstPlugins.DataContext = values;
+                }
+            }
+        }
     }
 }
