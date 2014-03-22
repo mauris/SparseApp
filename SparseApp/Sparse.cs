@@ -13,20 +13,21 @@ namespace SparseApp
         [STAThread]
         public static void Main(string[] args)
         {
-            bool cleanup = false;
+            bool reset = false;
             OptionSet set = new OptionSet()
             {
                {
-                   "cleanup", "Clean up the isolated storage used by Sparse when uninstlaling", v => cleanup = v != null
+                   "reset", "Reset all storage used by Sparse.", v => reset = v != null
                }
             };
 
-            if (cleanup)
+            if (reset)
             {
                 using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
                 {
                     store.Remove();
                 }
+                Console.WriteLine("Sparse has been reset successfully.");
             }
             else
             {
