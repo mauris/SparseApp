@@ -24,6 +24,15 @@ namespace SparseApp.Plugins
         {
         }
 
+        public virtual void RemovePlugin(string name)
+        {
+            plugins.Remove(name);
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null))
+            {
+                store.DeleteFile(name + ".yml");
+            }
+        }
+
         public virtual void LoadAvailablePlugins()
         {
             plugins = new Dictionary<String, Plugin>();
