@@ -80,22 +80,11 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
 
-                pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
-                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
-
-                List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
-                lstPlugins.DataContext = values;
-
                 txtPluginOutput.Text = "";
                 txtStatus.Text = "Select a plugin";
                 lstPlugins.SelectedIndex = -1;
 
-                if (values.Count == 0)
-                {
-                    ((VisualBrush)icoPluginIndicator.OpacityMask).Visual = (Visual)FindResource("appbar_puzzle");
-                    txtPluginStatus.Text = "This repository has no plugins installed.";
-                    pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
-                }
+                RefreshPluginsForRepository(repository);
             }
         }
 
@@ -377,9 +366,29 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                 {
                     repository.Plugins.RemoveAll(item => item == entry.Key);
                 }
-                List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
-                lstPlugins.DataContext = values;
+
+                RefreshPluginsForRepository(repository);
             }
+        }
+
+        private void RefreshPluginsForRepository(Repository repository)
+        {
+            List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+            lstPlugins.DataContext = values;
+
+            if (values.Count > 0)
+            {
+                pnlPluginInfo.Visibility = System.Windows.Visibility.Collapsed;
+                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                ((VisualBrush)icoPluginIndicator.OpacityMask).Visual = (Visual)FindResource("appbar_puzzle");
+                txtPluginStatus.Text = "This repository has no plugins installed.";
+                pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
+                pnlPluginActions.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
         }
     }
 }
