@@ -361,5 +361,25 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             }
             repo.SaveRepositories();
         }
+
+        private void lstAvailablePlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lstAvailablePlugins.SelectedItem != null && lstRepositories.SelectedItem != null)
+            {
+                Repository repository = (Repository)lstRepositories.SelectedItem;
+                KeyValuePair<string, Plugin> entry = (KeyValuePair<string, Plugin>)lstAvailablePlugins.SelectedItem;
+                if (repository.Plugins.Count(item => item == entry.Key) == 0)
+                {
+                    repository.Plugins.Add(entry.Key);
+
+                }
+                else
+                {
+                    repository.Plugins.RemoveAll(item => item == entry.Key);
+                }
+                List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+                lstPlugins.DataContext = values;
+            }
+        }
     }
 }
