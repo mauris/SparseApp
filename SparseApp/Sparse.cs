@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using Mono.Options;
 using System.IO.IsolatedStorage;
+using Ninject;
 
 namespace SparseApp
 {
@@ -35,7 +36,8 @@ namespace SparseApp
             }
             else
             {
-                App app = new App();
+                StandardKernel kernel = new StandardKernel(new DefaultModule());
+                App app = kernel.Get<App>();
                 app.InitializeComponent();
                 app.Run();
             }
