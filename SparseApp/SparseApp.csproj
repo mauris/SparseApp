@@ -94,6 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DefaultModule.cs" />
     <Compile Include="Mono.Options\Options.cs" />
     <Compile Include="Plugins\IPluginManager.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
