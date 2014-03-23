@@ -8,7 +8,7 @@ using ProtoBuf;
 
 namespace SparseApp.Repositories
 {
-    public class RepositoryManager
+    public class RepositoryManager: IRepositoryManager
     {
         protected List<Repository> repositories = new List<Repository>();
 
