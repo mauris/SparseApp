@@ -93,9 +93,9 @@
     </ApplicationDefinition>
     <Compile Include="Mono.Options\Options.cs" />
     <Compile Include="Plugins\IPluginManager.cs" />
-    <Compile Include="Plugins\Manager.cs" />
+    <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Plugins\Plugin.cs" />
-    <Compile Include="Repositories\Manager.cs" />
+    <Compile Include="Repositories\RepositoryManager.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Sparse.cs" />
     <Page Include="MainWindow.xaml">
