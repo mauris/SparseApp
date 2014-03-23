@@ -96,6 +96,7 @@
     </ApplicationDefinition>
     <Compile Include="DefaultModule.cs" />
     <Compile Include="Mono.Options\Options.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\IPluginManager.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Plugins\Plugin.cs" />
