@@ -12,8 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using SparseApp.Repositories;
 using SparseApp.Plugins;
-using SparseApp.Repositories;
-using SparseApp.Plugins;
 using System.Threading;
 using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
