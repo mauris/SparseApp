@@ -46,8 +46,13 @@ namespace SparseApp.Repositories
         {
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
+                if (store.FileExists(filename + ".bak"))
+                {
+                    store.DeleteFile(filename + ".bak");
+                }
                 if (store.FileExists(filename))
                 {
+                    store.CopyFile(filename, filename + ".bak");
                     store.DeleteFile(filename);
                 }
                 using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.CreateNew, FileAccess.Write, store))
