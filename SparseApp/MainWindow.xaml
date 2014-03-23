@@ -43,8 +43,23 @@
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
             
-            <controls:Flyout Name="flyAbout" Position="Left" Height="300" Theme="Dark" Header="About Sparse" IsModal="True">
-                
+            <controls:Flyout Name="flyAbout" Position="Right" Width="380" Theme="Dark" Header="About Sparse" IsModal="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
+                        <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
+                        <TextBlock FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
+                    </StackPanel>
+                </Grid>
             </controls:Flyout>
             
             <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Adapt" Header="Plugins" IsModal="True">
