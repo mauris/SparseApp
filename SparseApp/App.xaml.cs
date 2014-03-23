@@ -20,10 +20,5 @@ namespace SparseApp
 
         [Inject]
         public IPluginManager PluginManager { get; set; }
-
-        public App()
-            : base()
-        {
-        }
     }
 }
