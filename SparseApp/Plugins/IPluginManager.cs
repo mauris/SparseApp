@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparseApp.Plugins
 {
-    interface IPluginManager
+    public interface IPluginManager
     {
         void AddPlugin(string name, Plugin plugin);
 

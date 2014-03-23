@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparseApp.Repositories
 {
-    interface IRepositoryManager
+    public interface IRepositoryManager
     {
         void LoadRepositories();
 

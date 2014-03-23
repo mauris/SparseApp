@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using SparseApp.Repositories;
+using SparseApp.Plugins;
 
 namespace SparseApp
 {
@@ -11,11 +13,14 @@ namespace SparseApp
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {        
+    {
+        public IRepositoryManager RepositoryManager { get; set; }
+
+        public IPluginManager PluginManager { get; set; }
+
         public App()
             : base()
         {
-
         }
     }
 }
