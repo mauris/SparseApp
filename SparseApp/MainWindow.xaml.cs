@@ -127,17 +127,17 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             prgProgress.IsActive = true;
             ThreadStart start = delegate()
             {
-                while (plugin.IsRunning)
+                while (plugin.IsRunning())
                 {
                     Dispatcher.Invoke(
                         DispatcherPriority.Normal,
-                        new Action(() => txtPluginOutput.Text = plugin.Output)
+                        new Action(() => txtPluginOutput.Text = plugin.GetOutput())
                     );
                     Thread.Sleep(100);
                 }
                 Dispatcher.Invoke(
                     DispatcherPriority.Normal,
-                    new Action(() => txtPluginOutput.Text = plugin.Output)
+                    new Action(() => txtPluginOutput.Text = plugin.GetOutput())
                 );
                 Dispatcher.Invoke(
                     DispatcherPriority.Normal,
@@ -239,12 +239,12 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             if (lstAvailablePlugins.SelectedItem != null && lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
-                KeyValuePair<string, Plugin> entry = (KeyValuePair<string, Plugin>)lstAvailablePlugins.SelectedItem;
+                KeyValuePair<string, IPlugin> entry = (KeyValuePair<string, IPlugin>)lstAvailablePlugins.SelectedItem;
                 if (repository.Plugins.Count(item => item == entry.Key) == 0)
                 {
                     repository.Plugins.Add(entry.Key);
 
-                    List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+                    List<IPlugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
                     lstPlugins.DataContext = values;
                 }
                 else
@@ -290,7 +290,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
                     // refresh plugins for current repo
                     Repository currentRepo = (Repository)lstRepositories.SelectedItem;
-                    List<Plugin> values = plugins.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+                    List<IPlugin> values = plugins.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
                     lstPlugins.DataContext = values;
                 }
             }
@@ -343,7 +343,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            foreach (KeyValuePair<string, Plugin> item in plugins.Plugins)
+            foreach (KeyValuePair<string, IPlugin> item in plugins.Plugins)
             {
                 item.Value.Halt();
             }
@@ -371,7 +371,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
         private void RefreshPluginsForRepository(Repository repository)
         {
-            List<Plugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<Plugin>();
+            List<IPlugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
             lstPlugins.DataContext = values;
 
             if (values.Count > 0)

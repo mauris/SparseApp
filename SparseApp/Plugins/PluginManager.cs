@@ -10,9 +10,9 @@ namespace SparseApp.Plugins
 {
     public class PluginManager: IPluginManager
     {
-        protected Dictionary<String, Plugin> plugins = new Dictionary<String, Plugin>();
+        protected Dictionary<String, IPlugin> plugins = new Dictionary<String, IPlugin>();
 
-        public Dictionary<String, Plugin> Plugins
+        public Dictionary<String, IPlugin> Plugins
         {
             get
             {
@@ -24,7 +24,7 @@ namespace SparseApp.Plugins
         {
         }
 
-        public virtual void AddPlugin(string name, Plugin plugin)
+        public virtual void AddPlugin(string name, IPlugin plugin)
         {
             plugins.Add(name, plugin);
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
@@ -51,7 +51,7 @@ namespace SparseApp.Plugins
 
         public virtual void LoadPlugins()
         {
-            plugins = new Dictionary<String, Plugin>();
+            plugins = new Dictionary<String, IPlugin>();
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 var serializer = new YamlSerializer();
@@ -59,8 +59,8 @@ namespace SparseApp.Plugins
                 {
                     using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read, store))
                     {
-                        var plugin = serializer.Deserialize(stream, typeof(Plugin))[0];
-                        plugins.Add(Path.GetFileNameWithoutExtension(file), (Plugin)plugin);
+                        var plugin = serializer.Deserialize(stream, typeof(IPlugin))[0];
+                        plugins.Add(Path.GetFileNameWithoutExtension(file), (IPlugin)plugin);
                     }
                 }
                 store.Close();

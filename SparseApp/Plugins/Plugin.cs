@@ -8,7 +8,7 @@ using System.Yaml.Serialization;
 
 namespace SparseApp.Plugins
 {
-    public class Plugin
+    public class Plugin: IPlugin
     {
         public string Name { get; set; }
 
@@ -18,23 +18,16 @@ namespace SparseApp.Plugins
 
         protected string output = "";
 
-        [YamlSerialize(YamlSerializeMethod.Never)]
-        public string Output
-        {
-            get
-            {
-                return output;
-            }
-        }
-
         protected bool isRunning = false;
 
-        public bool IsRunning
+        public string GetOutput()
         {
-            get
-            {
-                return isRunning;
-            }
+            return output;
+        }
+
+        public bool IsRunning()
+        {
+            return isRunning;
         }
 
         public void Run(string path)
