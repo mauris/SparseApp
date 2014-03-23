@@ -6,12 +6,20 @@
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
                       Closing="MetroWindow_Closing"
         Title="Sparse" Height="600" Width="800">
+    
+    <controls:MetroWindow.Resources>
+        <RoutedUICommand x:Key="ShowAboutCommand" Text="About Sparse"></RoutedUICommand>
+    </controls:MetroWindow.Resources>
+    <controls:MetroWindow.CommandBindings>
+        <CommandBinding Command="{StaticResource ShowAboutCommand}" Executed="ShowAboutCommand_Executed"></CommandBinding>
+    </controls:MetroWindow.CommandBindings>
+    
     <controls:MetroWindow.WindowCommands>
         <controls:WindowCommands>
             <Button Name="btnTools" Click="btnTools_Click" ContextMenuService.Placement="Bottom">
                 <Button.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="About Sparse" />
+                        <MenuItem Command="{StaticResource ShowAboutCommand}" />
                     </ContextMenu>
                 </Button.ContextMenu>
                 <StackPanel Orientation="Horizontal">
@@ -25,13 +33,20 @@
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.WindowCommands>
+    
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
+            
             <controls:Flyout Name="flyOutput" Position="Right" Width="380" Theme="Dark" Header="{Binding Path=Text, ElementName=txtStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox IsReadOnly="True" BorderThickness="0" VerticalScrollBarVisibility="Auto"
                          TextWrapping="Wrap" AcceptsReturn="True" Margin="5"
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
+            
+            <controls:Flyout Name="flyAbout" Position="Left" Height="300" Theme="Dark" Header="About Sparse" IsModal="True">
+                
+            </controls:Flyout>
+            
             <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Adapt" Header="Plugins" IsModal="True">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
@@ -125,6 +140,7 @@
 
                 </Grid>
             </controls:Flyout>
+            
             <controls:Flyout Name="flyPluginInstaller" Position="Right" Width="400" Theme="Adapt" Header="Add Plugin" IsModal="True">
                 <Grid Margin="5px">
                     <Grid.Resources>
@@ -163,8 +179,10 @@
                     </StackPanel>
                 </Grid>
             </controls:Flyout>
+            
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>

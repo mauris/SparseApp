@@ -399,5 +399,10 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             btnAddPlugin.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
             btnAddPlugin.ContextMenu.IsOpen = true;
         }
+
+        private void ShowAboutCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            flyAbout.IsOpen = true;
+        }
     }
 }
