@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using SparseApp.Repositories;
 using SparseApp.Plugins;
+using Ninject;
 
 namespace SparseApp
 {
@@ -14,8 +15,10 @@ namespace SparseApp
     /// </summary>
     public partial class App : Application
     {
+        [Inject]
         public IRepositoryManager RepositoryManager { get; set; }
 
+        [Inject]
         public IPluginManager PluginManager { get; set; }
 
         public App()
