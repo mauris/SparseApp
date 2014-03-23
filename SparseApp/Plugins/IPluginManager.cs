@@ -7,6 +7,8 @@ namespace SparseApp.Plugins
 {
     public interface IPluginManager
     {
+        Dictionary<String, IPlugin> Plugins { get; }
+
         void AddPlugin(string name, IPlugin plugin);
 
         void RemovePlugin(string name);
