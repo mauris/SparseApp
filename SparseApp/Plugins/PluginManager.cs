@@ -8,7 +8,7 @@ using System.Yaml.Serialization;
 
 namespace SparseApp.Plugins
 {
-    public class Manager
+    public class PluginManager: IPluginManager
     {
         protected Dictionary<String, Plugin> plugins = new Dictionary<String, Plugin>();
 
@@ -20,7 +20,7 @@ namespace SparseApp.Plugins
             }
         }
 
-        public Manager()
+        public PluginManager()
         {
         }
 
@@ -49,7 +49,7 @@ namespace SparseApp.Plugins
             }
         }
 
-        public virtual void LoadAvailablePlugins()
+        public virtual void LoadPlugins()
         {
             plugins = new Dictionary<String, Plugin>();
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())

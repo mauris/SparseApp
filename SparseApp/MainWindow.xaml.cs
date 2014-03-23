@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using RepositoryManager = SparseApp.Repositories.Manager;
-using PluginManager = SparseApp.Plugins.Manager;
+using SparseApp.Plugins;
 using SparseApp.Repositories;
 using SparseApp.Plugins;
 using System.Threading;
@@ -40,7 +40,7 @@ namespace SparseApp
             InitializeComponent();
 
             plugins = new PluginManager();
-            plugins.LoadAvailablePlugins();
+            plugins.LoadPlugins();
             lstAvailablePlugins.DataContext = plugins.Plugins;
 
             repo = new RepositoryManager();

@@ -92,6 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Mono.Options\Options.cs" />
+    <Compile Include="Plugins\IPluginManager.cs" />
     <Compile Include="Plugins\Manager.cs" />
     <Compile Include="Plugins\Plugin.cs" />
     <Compile Include="Repositories\Manager.cs" />
