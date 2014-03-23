@@ -27,23 +27,22 @@ namespace SparseApp
     /// </summary>
     public partial class MainWindow
     {
-        protected RepositoryManager repo;
+        protected IRepositoryManager repositoryManager;
 
-        protected PluginManager plugins;
+        protected IPluginManager pluginManager;
 
         protected Thread ConsoleUpdatingThread;
 
         public MainWindow()
         {
             InitializeComponent();
+            pluginManager = ((App)App.Current).PluginManager;
+            repositoryManager = ((App)App.Current).RepositoryManager;
 
-            plugins = new PluginManager();
-            plugins.LoadPlugins();
-            lstAvailablePlugins.DataContext = plugins.Plugins;
+            pluginManager.LoadPlugins();
 
-            repo = new RepositoryManager();
-            repo.LoadRepositories();
-            lstRepositories.DataContext = repo.Repositories;
+            repositoryManager.LoadRepositories();
+            lstRepositories.DataContext = repositoryManager.Repositories;
             txtStatus.Text = "Select a repository";
 
             SetWelcomeText();
@@ -60,8 +59,8 @@ namespace SparseApp
 
 When plugin runs, the output will be shown here.
 
-You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToString()) + " " + (repo.Repositories.Count == 1 ? "repository" : "repositories") + " registered and "
-           + (plugins.Plugins.Count == 0 ? "no" : plugins.Plugins.Count.ToString()) + " " + (plugins.Plugins.Count == 1 ? "plugin" : "plugins") + " available.";
+You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManager.Repositories.Count.ToString()) + " " + (repositoryManager.Repositories.Count == 1 ? "repository" : "repositories") + " registered and "
+           + (pluginManager.Plugins.Count == 0 ? "no" : pluginManager.Plugins.Count.ToString()) + " " + (pluginManager.Plugins.Count == 1 ? "plugin" : "plugins") + " available.";
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -159,14 +158,14 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
             if (result == true)
             {
-                if (repo.Repositories.Where(repository => repository.Path == dialog.SelectedPath).Count() == 0)
+                if (repositoryManager.Repositories.Where(repository => repository.Path == dialog.SelectedPath).Count() == 0)
                 {
                     Repository repository = new Repository()
                     {
                         Path = dialog.SelectedPath
                     };
 
-                    repo.Repositories.Add(repository);
+                    repositoryManager.Repositories.Add(repository);
                     lstRepositories.Items.Refresh();
                 }
                 else
@@ -181,13 +180,13 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             if (lstRepositories.SelectedItem != null && lstPlugins.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
-                Plugin plugin = (Plugin)lstPlugins.SelectedItem;
+                IPlugin plugin = (IPlugin)lstPlugins.SelectedItem;
 
                 var result = await this.ShowMessageAsync("Uninstall Plugin \"" + plugin.Name + "\" from repository", "Are you sure you want to uninstall plugin \"" + plugin.Name + "\" from repository \"" + repository.Basename + "\"?", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
 
                 if (result == MessageDialogResult.Affirmative)
                 {
-                    string key = plugins.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
+                    string key = pluginManager.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
                     repository.Plugins.RemoveAll(item => (item == key));
 
                     RefreshPluginsForRepository(repository);
@@ -214,7 +213,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
             if (lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
-                repo.Repositories.Remove(repository);
+                repositoryManager.Repositories.Remove(repository);
                 lstRepositories.Items.Refresh();
             }
         }
@@ -244,7 +243,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                 {
                     repository.Plugins.Add(entry.Key);
 
-                    List<IPlugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+                    List<IPlugin> values = pluginManager.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
                     lstPlugins.DataContext = values;
                 }
                 else
@@ -258,11 +257,11 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
         {
             if (lstAvailablePlugins.SelectedItem != null)
             {
-                KeyValuePair<string, Plugin> entry = (KeyValuePair<string, Plugin>)lstAvailablePlugins.SelectedItem;
+                KeyValuePair<string, IPlugin> entry = (KeyValuePair<string, IPlugin>)lstAvailablePlugins.SelectedItem;
                 List<Repository> inUseRepos = new List<Repository>();
 
                 // do check for repositories that are using this plugin
-                foreach (Repository repository in repo.Repositories)
+                foreach (Repository repository in repositoryManager.Repositories)
                 {
                     if (repository.Plugins.Contains(entry.Key))
                     {
@@ -285,12 +284,12 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                     {
                         repository.Plugins.RemoveAll(item => item == entry.Key);
                     }
-                    plugins.RemovePlugin(entry.Key); // remove plugin
+                    pluginManager.RemovePlugin(entry.Key); // remove plugin
                     lstAvailablePlugins.Items.Refresh(); // refresh view
 
                     // refresh plugins for current repo
                     Repository currentRepo = (Repository)lstRepositories.SelectedItem;
-                    List<IPlugin> values = plugins.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+                    List<IPlugin> values = pluginManager.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
                     lstPlugins.DataContext = values;
                 }
             }
@@ -327,7 +326,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
                 Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
                 string filename = r.Replace(plugin.Name, "");
 
-                plugins.AddPlugin(filename, plugin);
+                pluginManager.AddPlugin(filename, plugin);
                 lstAvailablePlugins.Items.Refresh();
 
                 btnFormAddPluginCancel_Click(sender, e);
@@ -343,11 +342,11 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            foreach (KeyValuePair<string, IPlugin> item in plugins.Plugins)
+            foreach (KeyValuePair<string, IPlugin> item in pluginManager.Plugins)
             {
                 item.Value.Halt();
             }
-            repo.SaveRepositories();
+            repositoryManager.SaveRepositories();
         }
 
         private void lstAvailablePlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -371,7 +370,7 @@ You have " + (repo.Repositories.Count == 0 ? "no" : repo.Repositories.Count.ToSt
 
         private void RefreshPluginsForRepository(Repository repository)
         {
-            List<IPlugin> values = plugins.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+            List<IPlugin> values = pluginManager.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
             lstPlugins.DataContext = values;
 
             if (values.Count > 0)
