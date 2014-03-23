@@ -57,10 +57,17 @@ namespace SparseApp.Plugins
                 var serializer = new YamlSerializer();
                 foreach (string file in store.GetFileNames("*.yml"))
                 {
-                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read, store))
+                    try
                     {
-                        var plugin = serializer.Deserialize(stream, typeof(IPlugin))[0];
-                        plugins.Add(Path.GetFileNameWithoutExtension(file), (IPlugin)plugin);
+                        using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read, store))
+                        {
+                            var plugin = serializer.Deserialize(stream, typeof(IPlugin))[0];
+                            plugins.Add(Path.GetFileNameWithoutExtension(file), (IPlugin)plugin);
+                        }
+                    }
+                    catch
+                    {
+
                     }
                 }
                 store.Close();
