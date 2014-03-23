@@ -8,7 +8,7 @@ using ProtoBuf;
 namespace SparseApp.Repositories
 {
     [ProtoContract]
-    public class Repository: IRepository
+    public class Repository
     {
         [ProtoMember(1)]
         public string Path { get; set; }

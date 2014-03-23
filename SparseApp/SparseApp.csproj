@@ -100,7 +100,6 @@
     <Compile Include="Plugins\IPluginManager.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Plugins\Plugin.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IRepositoryManager.cs" />
     <Compile Include="Repositories\RepositoryManager.cs" />
     <Compile Include="Repositories\Repository.cs" />

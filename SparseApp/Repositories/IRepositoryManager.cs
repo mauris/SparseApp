@@ -7,7 +7,7 @@ namespace SparseApp.Repositories
 {
     public interface IRepositoryManager
     {
-        List<IRepository> Repositories { get; }
+        List<Repository> Repositories { get; }
 
         void LoadRepositories();
 

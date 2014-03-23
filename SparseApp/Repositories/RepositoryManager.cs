@@ -10,11 +10,11 @@ namespace SparseApp.Repositories
 {
     public class RepositoryManager: IRepositoryManager
     {
-        protected List<IRepository> repositories = new List<IRepository>();
+        protected List<Repository> repositories = new List<Repository>();
 
         protected const string filename = "repositories";
 
-        public List<IRepository> Repositories
+        public List<Repository> Repositories
         {
             get
             {
@@ -28,14 +28,14 @@ namespace SparseApp.Repositories
 
         public virtual void LoadRepositories()
         {
-            repositories = new List<IRepository>();
+            repositories = new List<Repository>();
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 if (store.FileExists(filename))
                 {
                     using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(filename, FileMode.Open, FileAccess.Read, store))
                     {
-                        repositories = Serializer.Deserialize<List<IRepository>>(stream);
+                        repositories = Serializer.Deserialize<List<Repository>>(stream);
                     }
                 }
                 store.Close();
