@@ -7,7 +7,7 @@
 4. ???
 5. PROFIT!!!
 
-Currently still a work-in-progress. More features such as  drag-drop will be completed pretty soon. Stay tuned.
+We are at 95% progress!
 
 ##Screenshots
 
@@ -24,10 +24,11 @@ Sparse uses the following open source libraries to achieve awesomeness:
 - [MahApps.Metro](https://github.com/MahApps/MahApps.Metro) - Awesome WPF Metro styling
 - [Mono.Options](http://www.nuget.org/packages/Mono.Options) - Arguments parsing
 - [Microsoft Async](https://www.nuget.org/packages/Microsoft.Bcl.Async) - for using `async` and `await` in Microsoft .NET 4.0 Framework
+- [Ninject](http://ninject.org/) - Ninja-styled IoC implementation and concrete object loading.
 - [Ookii Dialogs for WPF](http://www.ookii.org/software/dialogs/) - Windows Vista+ styled common dialogs (for selecting repository folders)
 - [protobuf-net](http://code.google.com/p/protobuf-net/) - Protocol Buffers serialization in .NET, for saving repositories information
 - [YAMLSerializer for .NET](http://yamlserializer.codeplex.com/) - for serializing / deserializing plugins
 
 ## License
 
-[New BSD License](http://opensource.org/licenses/BSD-3-Clause)
+The project is released open source under the [New BSD License](http://opensource.org/licenses/BSD-3-Clause).
