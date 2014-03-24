@@ -405,7 +405,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             flyAbout.IsOpen = true;
         }
 
-        private async void AddPluginFromFileCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void AddPluginFromFileCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             VistaOpenFileDialog dialog = new VistaOpenFileDialog();
             dialog.Title = "Import Sparse plugins from file...";
@@ -413,50 +413,58 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             bool? result = dialog.ShowDialog(this);
             if (result == true)
             {
-                var controller = await this.ShowProgressAsync("Importing Plugins...", "Loading files for import...");
-                controller.SetCancelable(true);
+                ImportPlugins(dialog.FileNames.ToList());
+            }
+        }
 
-                int progress = 0;
-                foreach (string file in dialog.FileNames)
+        private async void ImportPlugins(List<string> files)
+        {
+            var controller = await this.ShowProgressAsync("Importing Plugins...", "Loading files for import...");
+            controller.SetCancelable(true);
+
+            int progress = 0;
+            foreach (string file in files)
+            {
+                bool imported = false;
+                while (!imported)
                 {
-                    bool imported = false;
-                    while (!imported)
+                    if (controller.IsCanceled)
                     {
-                        if (controller.IsCanceled)
-                        {
-                            break;
-                        }
-
-                        try
-                        {
-                            controller.SetMessage("Importing " + file);
-                            pluginManager.ImportFile(file);
-                            imported = true;
-                        }
-                        catch
-                        {
-                        }
-                        if (!imported)
-                        {
-                            await controller.CloseAsync();
-                            MessageDialogResult messageResult = await this.ShowMessageAsync("Plugin Import Failed", "Sparse tried to import \"" + file + "\" as a plugin but the operation failed. Would you like to retry import, skip this file or cancel the rest of the import operation?", MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, new MetroDialogSettings() { AffirmativeButtonText = "Retry import", NegativeButtonText = "Skip this file", FirstAuxiliaryButtonText = "Cancel Import" });
-                            switch (messageResult)
-                            {
-                                case MessageDialogResult.Affirmative:
-                                    break;
-                                case MessageDialogResult.Negative:
-                                    imported = true;
-                                    break;
-                                case MessageDialogResult.FirstAuxiliary:
-                                    return;
-                            }
-                            controller = await this.ShowProgressAsync("Importing Plugins...", "Loading files for import...");
-                        }
+                        break;
                     }
-                    ++progress;
-                    controller.SetProgress(progress / dialog.FileNames.Count());
+
+                    try
+                    {
+                        controller.SetMessage("Importing " + file);
+                        pluginManager.ImportFile(file);
+                        imported = true;
+                    }
+                    catch
+                    {
+                    }
+                    if (!imported)
+                    {
+                        await controller.CloseAsync();
+                        MessageDialogResult messageResult = await this.ShowMessageAsync("Plugin Import Failed", "Sparse tried to import \"" + file + "\" as a plugin but the operation failed. Would you like to retry import, skip this file or cancel the rest of the import operation?", MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, new MetroDialogSettings() { AffirmativeButtonText = "Retry import", NegativeButtonText = "Skip this file", FirstAuxiliaryButtonText = "Cancel Import" });
+                        switch (messageResult)
+                        {
+                            case MessageDialogResult.Affirmative:
+                                break;
+                            case MessageDialogResult.Negative:
+                                imported = true;
+                                break;
+                            case MessageDialogResult.FirstAuxiliary:
+                                return;
+                        }
+                        controller = await this.ShowProgressAsync("Importing Plugins...", "Loading files for import...");
+                    }
                 }
-                await controller.CloseAsync();
+                ++progress;
+                controller.SetProgress(progress / files.Count());
+            }
+            await controller.CloseAsync();
+        }
+
             }
         }
     }
