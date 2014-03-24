@@ -15,7 +15,7 @@
             </Style>
         </TabControl.Resources>
         <TabItem Header="Sparse">
-            <Grid Background="#FFF2F2F2">
+            <Grid Background="{StaticResource GrayBrush10}">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
