@@ -35,15 +35,32 @@
         <TabItem Header="Licenses">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="160"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ListBox Grid.Column="0">
-
+                <ListBox Grid.Column="0" ItemsSource="{Binding}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
-                <TextBox Grid.Column="1" IsReadOnly="True" BorderThickness="0" TextWrapping="True">
+                <Border Grid.Column="1" BorderBrush="{StaticResource GrayBrush10}" BorderThickness="1,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="24"></TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="10"></TextBlock>
+                        <TextBox Grid.Row="2" IsReadOnly="True" BorderThickness="0" TextWrapping="Wrap" AcceptsReturn="True"
+                         FontFamily="/SparseApp;component/Resources/#Inconsolata" FontSize="12"
+                         VerticalScrollBarVisibility="Auto">
 
-                </TextBox>
+                        </TextBox>
+                    </Grid>
+                </Border>
             </Grid>
         </TabItem>
     </TabControl>
