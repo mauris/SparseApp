@@ -73,7 +73,18 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Licenses">
-                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Grid.Column="0">
+                                
+                            </ListBox>
+                            <TextBox Grid.Column="1">
+                                
+                            </TextBox>
+                        </Grid>
                     </TabItem>
                 </TabControl>
             </controls:Flyout>
