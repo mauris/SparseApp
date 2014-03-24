@@ -55,6 +55,51 @@ namespace SparseApp.Views
                 }
             );
 
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Ninject",
+                    Website = "http://ninject.org/",
+                    License = SparseApp.Properties.Resources.LicenseNinject
+                }
+            );
+
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Microsoft Async",
+                    Website = "https://www.nuget.org/packages/Microsoft.Bcl.Async",
+                    License = SparseApp.Properties.Resources.LicenseMicrosoftAsync
+                }
+            );
+
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Ookii.Dialogs",
+                    Website = "http://www.ookii.org/software/dialogs/",
+                    License = SparseApp.Properties.Resources.LicenseOokiiDialogs
+                }
+            );
+
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Protocol Buffers for .NET",
+                    Website = "http://code.google.com/p/protobuf-net/",
+                    License = SparseApp.Properties.Resources.LicenseProtocolBufNet
+                }
+            );
+
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "YamlSerializer",
+                    Website = "http://yamlserializer.codeplex.com/",
+                    License = SparseApp.Properties.Resources.LicenseYamlSerializer
+                }
+            );
+
             lstLicenses.DataContext = licenses;
         }
     }

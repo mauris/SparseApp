@@ -79,6 +79,29 @@ namespace SparseApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MICROSOFT SOFTWARE LICENSE TERMS
+        ///
+        ///MICROSOFT .NET LIBRARY
+        ///
+        ///These license terms are an agreement between Microsoft Corporation (or based on where you live, one of its affiliates) and you. Please read them. They apply to the software named above, which includes the media on which you received it, if any. The terms also apply to any Microsoft
+        ///
+        ///·         updates,
+        ///
+        ///·         supplements,
+        ///
+        ///·         Internet-based services, and
+        ///
+        ///·         support services
+        ///
+        ///for this software, unless other terms accomp [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LicenseMicrosoftAsync {
+            get {
+                return ResourceManager.GetString("LicenseMicrosoftAsync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copyright (c) 2001, 2002, 2003 Ximian, Inc and the individuals listed
         ///on the ChangeLog entries.
         ///
@@ -94,6 +117,83 @@ namespace SparseApp.Properties {
         internal static string LicenseMonoOptions {
             get {
                 return ResourceManager.GetString("LicenseMonoOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ninject is intended to be used in both open-source and commercial environments. To allow its use in as many
+        ///situations as possible, Ninject is dual-licensed. You may choose to use Ninject under either the Apache License,
+        ///Version 2.0, or the Microsoft Public License (Ms-PL). These licenses are essentially identical, but you are
+        ///encouraged to evaluate both to determine which best fits your intended use.
+        ///
+        ///-----
+        ///
+        ///Apache License, Version 2.0
+        ///
+        ///TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LicenseNinject {
+            get {
+                return ResourceManager.GetString("LicenseNinject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License agreement for Ookii.Dialogs.
+        ///
+        ///Copyright © Sven Groot (Ookii.org) 2009
+        ///All rights reserved.
+        ///
+        ///
+        ///Redistribution and use in source and binary forms, with or without 
+        ///modification, are permitted provided that the following conditions are met:
+        ///
+        ///1) Redistributions of source code must retain the above copyright notice, 
+        ///   this list of conditions and the following disclaimer. 
+        ///2) Redistributions in binary form must reproduce the above copyright notice,
+        ///   this list of conditions and the following [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LicenseOokiiDialogs {
+            get {
+                return ResourceManager.GetString("LicenseOokiiDialogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The core Protocol Buffers technology is provided courtesy of Google.
+        ///At the time of writing, this is released under the BSD license.
+        ///Full details can be found here:
+        ///
+        ///http://code.google.com/p/protobuf/
+        ///
+        ///
+        ///This .NET implementation is Copyright 2008 Marc Gravell
+        ///
+        ///Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+        ///you may not use this file except in compliance with the License.
+        ///You may obtain a copy of the License at
+        ///
+        ///http://www.apache.org/licenses/LICENSE-2.0
+        ///
+        ///Unless required by appl [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LicenseProtocolBufNet {
+            get {
+                return ResourceManager.GetString("LicenseProtocolBufNet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The MIT License (MIT)
+        ///
+        ///Copyright (c) 2009 Osamu TAKEUCHI &lt;osamu@big.jp&gt;
+        ///
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+        ///        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LicenseYamlSerializer {
+            get {
+                return ResourceManager.GetString("LicenseYamlSerializer", resourceCulture);
             }
         }
     }
