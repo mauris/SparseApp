@@ -462,6 +462,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 ++progress;
                 controller.SetProgress(progress / files.Count());
             }
+            lstAvailablePlugins.Items.Refresh();
             await controller.CloseAsync();
         }
 
