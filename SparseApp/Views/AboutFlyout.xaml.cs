@@ -100,6 +100,15 @@ namespace SparseApp.Views
                 }
             );
 
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Sparse",
+                    Website = "http://github.com/mauris/sparseapp/",
+                    License = SparseApp.Properties.Resources.LicenseSparseApp
+                }
+            );
+
             lstLicenses.DataContext = licenses.OrderBy(item => item.Name).ToList();
         }
 
