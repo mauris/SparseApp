@@ -10,7 +10,7 @@
     
     <controls:MetroWindow.Resources>
         <RoutedUICommand x:Key="ShowAboutCommand" Text="About Sparse"></RoutedUICommand>
-        <RoutedUICommand x:Key="AddPluginFromFileCommand" Text="From File"></RoutedUICommand>
+        <RoutedUICommand x:Key="AddPluginFromFileCommand" Text="From File(s)..."></RoutedUICommand>
         <s:SelectedIndexConverter x:Key="SelectedIndexConverter"></s:SelectedIndexConverter>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.CommandBindings>

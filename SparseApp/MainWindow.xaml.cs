@@ -405,9 +405,59 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             flyAbout.IsOpen = true;
         }
 
-        private void AddPluginFromFileCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void AddPluginFromFileCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            VistaOpenFileDialog dialog = new VistaOpenFileDialog();
+            dialog.Title = "Import Sparse plugins from file...";
+            dialog.Multiselect = true;
+            bool? result = dialog.ShowDialog(this);
+            if (result == true)
+            {
+                var controller = await this.ShowProgressAsync("Importing Plugins...", "Loading files for import...");
+                controller.SetCancelable(true);
 
+                int progress = 0;
+                foreach (string file in dialog.FileNames)
+                {
+                    bool imported = false;
+                    while (!imported)
+                    {
+                        if (controller.IsCanceled)
+                        {
+                            break;
+                        }
+
+                        try
+                        {
+                            controller.SetMessage("Importing " + file);
+                            pluginManager.ImportFile(file);
+                            imported = true;
+                        }
+                        catch
+                        {
+                        }
+                        if (!imported)
+                        {
+                            await controller.CloseAsync();
+                            MessageDialogResult messageResult = await this.ShowMessageAsync("Plugin Import Failed", "Sparse tried to import \"" + file + "\" as a plugin but the operation failed. Would you like to retry import, skip this file or cancel the rest of the import operation?", MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, new MetroDialogSettings() { AffirmativeButtonText = "Retry import", NegativeButtonText = "Skip this file", FirstAuxiliaryButtonText = "Cancel Import" });
+                            switch (messageResult)
+                            {
+                                case MessageDialogResult.Affirmative:
+                                    break;
+                                case MessageDialogResult.Negative:
+                                    imported = true;
+                                    break;
+                                case MessageDialogResult.FirstAuxiliary:
+                                    return;
+                            }
+                            controller = await this.ShowProgressAsync("Importing Plugins...", "Loading files for import...");
+                        }
+                    }
+                    ++progress;
+                    controller.SetProgress(progress / dialog.FileNames.Count());
+                }
+                await controller.CloseAsync();
+            }
         }
     }
 
