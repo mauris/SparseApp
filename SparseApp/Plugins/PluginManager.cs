@@ -30,7 +30,6 @@ namespace SparseApp.Plugins
 
         public virtual void AddPlugin(string name, IPlugin plugin)
         {
-            plugins.Add(name, plugin);
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 var serializer = new YamlSerializer();
@@ -41,6 +40,7 @@ namespace SparseApp.Plugins
                 }
                 store.Close();
             }
+            plugins.Add(name, plugin);
         }
 
         public virtual void RemovePlugin(string name)
@@ -72,7 +72,7 @@ namespace SparseApp.Plugins
                     }
                     catch
                     {
-
+                        pluginsFailedToLoad.Add(file);
                     }
                 }
                 store.Close();
