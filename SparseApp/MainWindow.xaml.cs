@@ -158,20 +158,25 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
             if (result == true)
             {
-                if (repositoryManager.Repositories.Where(repository => repository.Path == dialog.SelectedPath).Count() == 0)
-                {
-                    Repository repository = new Repository()
-                    {
-                        Path = dialog.SelectedPath
-                    };
+                RepositoryAdd(dialog.SelectedPath);
+            }
+        }
 
-                    repositoryManager.Repositories.Add(repository);
-                    lstRepositories.Items.Refresh();
-                }
-                else
+        private void RepositoryAdd(string path)
+        {
+            if (repositoryManager.Repositories.Where(repository => repository.Path == path).Count() == 0)
+            {
+                Repository repository = new Repository()
                 {
-                    this.ShowMessageAsync("Repository already exists", "The selected folder \"" + dialog.SelectedPath + "\" has already been registered in Sparse.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "OK" });
-                }
+                    Path = path
+                };
+
+                repositoryManager.Repositories.Add(repository);
+                lstRepositories.Items.Refresh();
+            }
+            else
+            {
+                this.ShowMessageAsync("Repository already exists", "The selected folder \"" + path + "\" has already been registered in Sparse.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "OK" });
             }
         }
 
@@ -499,7 +504,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     if (Directory.Exists(file))
                     {
                         // dropped is a path, add as repository
-                        repositoryManager.Repositories.Add(new Repository() { Path = file });
+                        RepositoryAdd(file);
                         lstRepositories.Items.Refresh();
                     }
                     else if (File.Exists(file) && Path.GetExtension(file).Equals(".yml", StringComparison.InvariantCultureIgnoreCase))
