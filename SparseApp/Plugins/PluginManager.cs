@@ -29,7 +29,7 @@ namespace SparseApp.Plugins
             using (FileStream stream = File.OpenRead(file))
             {
                 var serializer = new YamlSerializer();
-                IPlugin plugin = (IPlugin)serializer.Deserialize(stream, typeof(IPlugin))[0];
+                Plugin plugin = (Plugin)serializer.Deserialize(stream, typeof(Plugin))[0];
                 AddPlugin(Path.GetFileNameWithoutExtension(file), plugin);
             }
         }
@@ -72,8 +72,8 @@ namespace SparseApp.Plugins
                     {
                         using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(file, FileMode.Open, FileAccess.Read, store))
                         {
-                            var plugin = serializer.Deserialize(stream, typeof(IPlugin))[0];
-                            plugins.Add(Path.GetFileNameWithoutExtension(file), (IPlugin)plugin);
+                            Plugin plugin = (Plugin)serializer.Deserialize(stream, typeof(Plugin))[0];
+                            plugins.Add(Path.GetFileNameWithoutExtension(file), plugin);
                         }
                     }
                     catch
