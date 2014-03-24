@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:s="clr-namespace:SparseApp"
         ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
                       Closing="MetroWindow_Closing"
@@ -9,6 +10,7 @@
     
     <controls:MetroWindow.Resources>
         <RoutedUICommand x:Key="ShowAboutCommand" Text="About Sparse"></RoutedUICommand>
+        <s:SelectedIndexConverter x:Key="SelectedIndexConverter"></s:SelectedIndexConverter>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.CommandBindings>
         <CommandBinding Command="{StaticResource ShowAboutCommand}" Executed="ShowAboutCommand_Executed"></CommandBinding>
@@ -110,6 +112,18 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
+                            <Style x:Key="StackInstallButtonPluginHide" TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}">
+                                <Setter Property="Button.Visibility" Value="Collapsed"></Setter>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=lstRepositories, Path=SelectedIndex, Converter={StaticResource SelectedIndexConverter}}" Value="true"></Condition>
+                                            <Condition Binding="{Binding ElementName=lstAvailablePlugins, Path=SelectedIndex, Converter={StaticResource SelectedIndexConverter}}" Value="true"></Condition>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
                         </StackPanel.Resources>
 
                         <Button Name="btnAddPlugin" Click="btnAddPlugin_Click" Padding="0">
@@ -130,7 +144,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Button Name="btnFlyInstallPlugin" Click="btnFlyInstallPlugin_Click" Style="{StaticResource StackButtonPluginHide}">
+                        <Button Name="btnFlyInstallPlugin" Click="btnFlyInstallPlugin_Click" Style="{StaticResource StackInstallButtonPluginHide}">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Fill="{StaticResource GrayBrush1}">
                                     <Rectangle.OpacityMask>
@@ -318,7 +332,7 @@
                     Select a repository on the left to get started.
                     </TextBlock>
                 </Grid>
-                <StackPanel Name="pnlPluginActions" Style="{StaticResource StackButtonPanel}" Grid.Row="1" Visibility="Collapsed">
+                <StackPanel Name="pnlPluginActions" Style="{StaticResource StackButtonPanel}" Grid.Row="1">
                     <StackPanel.Resources>
                         <Style x:Key="StackButtonPluginHide" TargetType="{x:Type Button}" BasedOn="{StaticResource StackButton}">
                             <Style.Triggers>

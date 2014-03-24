@@ -19,6 +19,7 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace SparseApp
 {
@@ -72,11 +73,9 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 txtPluginStatus.Text = "Select a repository on the left to get started.";
                 lstPlugins.DataContext = new List<Plugin>();
                 pnlPluginInfo.Visibility = System.Windows.Visibility.Visible;
-                pnlPluginActions.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
-                pnlPluginActions.Visibility = System.Windows.Visibility.Visible;
                 Repository repository = (Repository)lstRepositories.SelectedItem;
 
                 txtPluginOutput.Text = "";
@@ -404,6 +403,19 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
         private void ShowAboutCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             flyAbout.IsOpen = true;
+        }
+    }
+
+    public class SelectedIndexConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (int)value != -1;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new InvalidOperationException("Value cannot be converted back lah deh!");
         }
     }
 }
