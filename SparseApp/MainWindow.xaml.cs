@@ -404,6 +404,11 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
         {
             flyAbout.IsOpen = true;
         }
+
+        private void AddPluginFromFileCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 
     public class SelectedIndexConverter : IValueConverter

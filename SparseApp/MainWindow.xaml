@@ -10,10 +10,12 @@
     
     <controls:MetroWindow.Resources>
         <RoutedUICommand x:Key="ShowAboutCommand" Text="About Sparse"></RoutedUICommand>
+        <RoutedUICommand x:Key="AddPluginFromFileCommand" Text="From File"></RoutedUICommand>
         <s:SelectedIndexConverter x:Key="SelectedIndexConverter"></s:SelectedIndexConverter>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.CommandBindings>
         <CommandBinding Command="{StaticResource ShowAboutCommand}" Executed="ShowAboutCommand_Executed"></CommandBinding>
+        <CommandBinding Command="{StaticResource AddPluginFromFileCommand}" Executed="AddPluginFromFileCommand_Executed"></CommandBinding>
     </controls:MetroWindow.CommandBindings>
     
     <controls:MetroWindow.WindowCommands>
@@ -129,7 +131,7 @@
                         <Button Name="btnAddPlugin" Click="btnAddPlugin_Click" Padding="0">
                             <Button.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="From File"></MenuItem>
+                                    <MenuItem Command="{StaticResource AddPluginFromFileCommand}"></MenuItem>
                                 </ContextMenu>
                             </Button.ContextMenu>
                             <StackPanel Orientation="Horizontal">
