@@ -6,7 +6,8 @@
         xmlns:sv="clr-namespace:SparseApp.Views"
         ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
-                      Closing="MetroWindow_Closing"
+        DragEnter="MetroWindow_DragEnter" DragLeave="MetroWindow_DragLeave" Drop="MetroWindow_Drop" AllowDrop="True"
+        Closing="MetroWindow_Closing"
         Title="Sparse" Height="600" Width="800">
     
     <controls:MetroWindow.Resources>

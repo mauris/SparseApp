@@ -465,7 +465,51 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             await controller.CloseAsync();
         }
 
+        private void MetroWindow_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                pnlDragDropIndicator.Visibility = System.Windows.Visibility.Visible;
+                e.Effects = DragDropEffects.Copy;
             }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private void MetroWindow_DragLeave(object sender, DragEventArgs e)
+        {
+            pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void MetroWindow_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = e.Data.GetData(DataFormats.FileDrop, false) as string[];
+
+                List<string> filesToImport = new List<string>();
+                foreach (string file in files)
+                {
+                    if (Directory.Exists(file))
+                    {
+                        // dropped is a path, add as repository
+                        repositoryManager.Repositories.Add(new Repository() { Path = file });
+                        lstRepositories.Items.Refresh();
+                    }
+                    else if (File.Exists(file) && Path.GetExtension(file).Equals(".yml", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        filesToImport.Add(file);
+                    }
+                }
+
+                if (filesToImport.Count > 0)
+                {
+                    ImportPlugins(filesToImport);
+                }
+            }
+            pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 
