@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:s="clr-namespace:SparseApp"
+        xmlns:sv="clr-namespace:SparseApp.Views"
         ShowTitleBar="False" ShowActivated="True" ResizeMode="CanResizeWithGrip"
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
                       Closing="MetroWindow_Closing"
@@ -47,47 +48,7 @@
                          Text="{Binding Path=Text, ElementName=txtPluginOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </controls:Flyout>
             
-            <controls:Flyout Name="flyAbout" Position="Right" Width="380" Theme="Light" Header="About Sparse" IsModal="True">
-                <TabControl>
-                    <TabControl.Resources>
-                        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
-                            <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="12"></Setter>
-                        </Style>
-                    </TabControl.Resources>
-                    <TabItem Header="Sparse">
-                        <Grid Background="{StaticResource GrayBrush5}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
-                                <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
-                                <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Licenses">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="160"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ListBox Grid.Column="0">
-                                
-                            </ListBox>
-                            <TextBox Grid.Column="1">
-                                
-                            </TextBox>
-                        </Grid>
-                    </TabItem>
-                </TabControl>
-            </controls:Flyout>
+            <sv:AboutFlyout x:Name="flyAbout"></sv:AboutFlyout>
             
             <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Adapt" Header="Plugins" IsModal="True">
                 <Grid Margin="5">
