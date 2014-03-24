@@ -389,5 +389,14 @@
                 </TextBox>
             </Grid>
         </Grid>
+
+        <Grid Name="pnlDragDropIndicator" Grid.Row="1" Visibility="Collapsed" Background="#AAFFFFFF">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="32" TextWrapping="Wrap" TextAlignment="Center">Drop it and we'll take over!</TextBlock>
+            <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" TextWrapping="Wrap" TextAlignment="Center">If it is a folder, we will add it to the list of repositories. We will attempt to import files as plugins (YML format).</TextBlock>
+        </Grid>
     </Grid>
 </controls:MetroWindow>
