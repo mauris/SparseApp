@@ -288,9 +288,12 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     lstAvailablePlugins.Items.Refresh(); // refresh view
 
                     // refresh plugins for current repo
-                    Repository currentRepo = (Repository)lstRepositories.SelectedItem;
-                    List<IPlugin> values = pluginManager.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
-                    lstPlugins.DataContext = values;
+                    if (lstRepositories.SelectedItem != null)
+                    {
+                        Repository currentRepo = (Repository)lstRepositories.SelectedItem;
+                        List<IPlugin> values = pluginManager.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+                        lstPlugins.DataContext = values;
+                    }
                 }
             }
         }
