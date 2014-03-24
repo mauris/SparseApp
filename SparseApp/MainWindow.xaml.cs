@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using SparseApp.Repositories;
 using SparseApp.Plugins;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
 using MahApps.Metro.Controls.Dialogs;
@@ -446,6 +447,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                         controller.SetMessage("Importing " + file);
                         pluginManager.ImportFile(file);
                         imported = true;
+                        await TaskEx.Delay(100);
                     }
                     catch
                     {
