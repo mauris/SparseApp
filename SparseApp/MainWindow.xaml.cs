@@ -40,8 +40,9 @@ namespace SparseApp
             repositoryManager = ((App)App.Current).RepositoryManager;
 
             pluginManager.LoadPlugins();
-
             repositoryManager.LoadRepositories();
+
+            lstAvailablePlugins.DataContext = pluginManager.Plugins;
             lstRepositories.DataContext = repositoryManager.Repositories;
             txtStatus.Text = "Select a repository";
 
