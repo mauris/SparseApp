@@ -22,7 +22,7 @@ namespace SparseApp.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace SparseApp.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SparseApp.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace SparseApp.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,22 +61,39 @@ namespace SparseApp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to - Name: MahApps.Metro
-        ///  Website: http://mahapps.com/MahApps.Metro/
-        ///  License:&gt;
-        ///	Microsoft Public License (Ms-PL)
+        ///   Looks up a localized string similar to Microsoft Public License (Ms-PL)
         ///
-        ///	This license governs use of the accompanying software. If you use the software, you
-        ///	accept this license. If you do not accept the license, do not use the software.
+        ///This license governs use of the accompanying software. If you use the software, you
+        ///accept this license. If you do not accept the license, do not use the software.
         ///
-        ///	1. Definitions
-        ///	The terms &quot;reproduce,&quot; &quot;reproduction,&quot; &quot;derivative works,&quot; and &quot;distribution&quot; have the
-        ///	same meaning here as under U.S. copyright law.
-        ///	A &quot;contribution&quot; is the original software, or any additions or chan [rest of string was truncated]&quot;;.
+        ///1. Definitions
+        ///The terms &quot;reproduce,&quot; &quot;reproduction,&quot; &quot;derivative works,&quot; and &quot;distribution&quot; have the
+        ///same meaning here as under U.S. copyright law.
+        ///A &quot;contribution&quot; is the original software, or any additions or changes to the software.
+        ///A &quot;contributor&quot; is any person that distributes its contribution und [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string licenses {
+        internal static string LicenseMahAppsMetro {
             get {
-                return ResourceManager.GetString("licenses", resourceCulture);
+                return ResourceManager.GetString("LicenseMahAppsMetro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright (c) 2001, 2002, 2003 Ximian, Inc and the individuals listed
+        ///on the ChangeLog entries.
+        ///
+        ///Copyright (C) 2008 Novell (http://www.novell.com)
+        ///Copyright (C) 2009 Federico Di Gregorio.
+        ///Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
+        ///
+        ///Permission is hereby granted, free of charge, to any person obtaining
+        ///a copy of this software and associated documentation files (the
+        ///&quot;Software&quot;), to deal in the Software without restriction, including
+        ///without limitation the rights to use, copy, modify, mer [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LicenseMonoOptions {
+            get {
+                return ResourceManager.GetString("LicenseMonoOptions", resourceCulture);
             }
         }
     }
