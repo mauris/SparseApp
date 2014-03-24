@@ -1,0 +1,48 @@
+﻿<controls:Flyout x:Class="SparseApp.Views.AboutFlyout"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"  Position="Right" Width="380" Theme="Light" Header="About Sparse" IsModal="True"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <TabControl>
+        <TabControl.Resources>
+            <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
+                <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="12"></Setter>
+            </Style>
+        </TabControl.Resources>
+        <TabItem Header="Sparse">
+            <Grid Background="{StaticResource GrayBrush5}">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
+                    <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
+                    <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Licenses">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ListBox Grid.Column="0">
+
+                </ListBox>
+                <TextBox Grid.Column="1" IsReadOnly="True" BorderThickness="0" TextWrapping="True">
+
+                </TextBox>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</controls:Flyout>
