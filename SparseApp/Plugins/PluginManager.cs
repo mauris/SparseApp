@@ -26,6 +26,12 @@ namespace SparseApp.Plugins
 
         public virtual void ImportFile(string file)
         {
+            using (FileStream stream = File.OpenRead(file))
+            {
+                var serializer = new YamlSerializer();
+                IPlugin plugin = (IPlugin)serializer.Deserialize(stream, typeof(IPlugin))[0];
+                AddPlugin(Path.GetFileNameWithoutExtension(file), plugin);
+            }
         }
 
         public virtual void AddPlugin(string name, IPlugin plugin)
