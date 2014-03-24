@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Reflection;
 
 namespace SparseApp
 {
@@ -48,6 +49,9 @@ namespace SparseApp
             txtStatus.Text = "Select a repository";
 
             SetWelcomeText();
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            txtAppVersion.Text = "version " + assembly.GetName().Version.ToString();
         }
 
         private void SetWelcomeText()
