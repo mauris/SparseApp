@@ -100,7 +100,7 @@ namespace SparseApp.Views
                 }
             );
 
-            lstLicenses.DataContext = licenses;
+            lstLicenses.DataContext = licenses.OrderBy(item => item.Name).ToList();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
