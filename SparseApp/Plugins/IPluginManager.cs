@@ -9,10 +9,12 @@ namespace SparseApp.Plugins
     {
         Dictionary<String, IPlugin> Plugins { get; }
 
+        void ImportFile(string file);
+
         void AddPlugin(string name, IPlugin plugin);
 
         void RemovePlugin(string name);
 
-        void LoadPlugins();
+        List<string> LoadPlugins();
     }
 }

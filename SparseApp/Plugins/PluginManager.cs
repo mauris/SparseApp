@@ -24,6 +24,10 @@ namespace SparseApp.Plugins
         {
         }
 
+        public virtual void ImportFile(string file)
+        {
+        }
+
         public virtual void AddPlugin(string name, IPlugin plugin)
         {
             plugins.Add(name, plugin);
@@ -49,8 +53,9 @@ namespace SparseApp.Plugins
             }
         }
 
-        public virtual void LoadPlugins()
+        public virtual List<string> LoadPlugins()
         {
+            List<string> pluginsFailedToLoad = new List<string>();
             plugins = new Dictionary<String, IPlugin>();
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
             {
@@ -72,6 +77,7 @@ namespace SparseApp.Plugins
                 }
                 store.Close();
             }
+            return pluginsFailedToLoad;
         }
     }
 }
