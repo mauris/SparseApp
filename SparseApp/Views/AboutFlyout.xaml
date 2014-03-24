@@ -4,7 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d"  Position="Right" Width="380" Theme="Light" Header="About Sparse" IsModal="True"
+             mc:Ignorable="d"  Position="Right" 
+             Margin="160,0,0,0" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth}"
+             Theme="Light" Header="About Sparse" IsModal="True"
              d:DesignHeight="300" d:DesignWidth="300">
     <TabControl>
         <TabControl.Resources>
