@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ListBox Grid.Column="0" ItemsSource="{Binding}">
+                <ListBox Name="lstLicenses" Grid.Column="0" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"></TextBlock>
@@ -46,17 +46,18 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Border Grid.Column="1" BorderBrush="{StaticResource GrayBrush10}" BorderThickness="1,0,0,0">
-                    <Grid>
+                    <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="24"></TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="10"></TextBlock>
+                        <TextBlock Grid.Row="0" FontSize="24" Text="{Binding ElementName=lstLicenses, Path=SelectedItem.Name}"></TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="12" Text="{Binding ElementName=lstLicenses, Path=SelectedItem.Website}"></TextBlock>
                         <TextBox Grid.Row="2" IsReadOnly="True" BorderThickness="0" TextWrapping="Wrap" AcceptsReturn="True"
+                                 Margin="0,5,0,0"
                          FontFamily="/SparseApp;component/Resources/#Inconsolata" FontSize="12"
-                         VerticalScrollBarVisibility="Auto">
+                         VerticalScrollBarVisibility="Auto" Text="{Binding ElementName=lstLicenses, Path=SelectedItem.License}">
 
                         </TextBox>
                     </Grid>
