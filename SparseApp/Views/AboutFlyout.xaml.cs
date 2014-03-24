@@ -36,11 +36,26 @@ namespace SparseApp.Views
         private void LoadLicenses()
         {
             List<OpenSourceLicense> licenses = new List<OpenSourceLicense>();
-            
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            var serializer = new YamlSerializer();
 
-            licenses = ((OpenSourceLicense[])serializer.Deserialize(SparseApp.Properties.Resources.licenses, typeof(OpenSourceLicense))).ToList<OpenSourceLicense>();
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "MahApps.Metro",
+                    Website = "http://mahapps.com/MahApps.Metro/",
+                    License = SparseApp.Properties.Resources.LicenseMahAppsMetro
+                }
+            );
+
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Mono.Options",
+                    Website = "https://github.com/mono/mono/",
+                    License = SparseApp.Properties.Resources.LicenseMonoOptions
+                }
+            );
+
+            lstLicenses.DataContext = licenses;
         }
     }
 }
