@@ -1,7 +1,9 @@
 #Sparse
 > Sparse is a UI tool for running repetitive CLI tools at a double click.
 
-1. Register your repositories and work folders
+Discussion and Support at [![Gitter chat](https://badges.gitter.im/mauris/SparseApp.png)](https://gitter.im/mauris/SparseApp)
+
+1. Register your repositories and working folders
 2. Install plugins for your repositories
 3. Double click on the plugin to run
 4. ???
