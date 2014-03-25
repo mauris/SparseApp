@@ -29,6 +29,16 @@
                 <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
                     <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
                     <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
+                    <StackPanel>
+                        <TextBlock TextAlignment="Center" Margin="5">
+                            <Hyperlink NavigateUri="https://gitter.im/mauris/sparseapp" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                                <Hyperlink.Foreground>
+                                    <SolidColorBrush Color="Black"></SolidColorBrush>
+                                </Hyperlink.Foreground>
+                                <TextBlock FontFamily="Wingdings">*</TextBlock> Chat Support
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </TabItem>
