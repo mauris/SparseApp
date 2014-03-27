@@ -8,7 +8,7 @@
         MinHeight="400" MinWidth="480" GlowBrush="{StaticResource BlackBrush}" AllowsTransparency="False"
         DragEnter="MetroWindow_DragEnter" DragLeave="MetroWindow_DragLeave" Drop="MetroWindow_Drop" AllowDrop="True"
         Closing="MetroWindow_Closing"
-        Title="Sparse" Height="600" Width="800">
+        Title="Sparse" Height="600" Width="800" Icon="Resources/sparseapp_logo_256px.ico">
     
     <controls:MetroWindow.Resources>
         <RoutedUICommand x:Key="ShowAboutCommand" Text="About Sparse"></RoutedUICommand>
