@@ -27,6 +27,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
+                    <Image Width="200" Height="200" Source="/SparseApp;component/Resources/SparseApp-Logo.png" RenderOptions.BitmapScalingMode="HighQuality"></Image>
                     <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
                     <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
                     <StackPanel>
