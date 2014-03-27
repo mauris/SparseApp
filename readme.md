@@ -19,6 +19,10 @@ We are at 95% progress!
 ![](http://i.imgur.com/FtK90n9.png)
 ![](http://i.imgur.com/k29sZav.png)
 
+##Specs
+
+Sparse is built with Microsoft .NET Framework 4.0 Full, InstallShield LE for Visual Studio 2013 and Microsoft Visual Studio Ultimate 2013.
+
 ##Libraries
 
 Sparse uses the following open source libraries to achieve awesomeness:
