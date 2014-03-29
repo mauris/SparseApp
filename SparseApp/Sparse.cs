@@ -36,7 +36,9 @@ namespace SparseApp
             {
                 StandardKernel kernel = new StandardKernel(new DefaultModule());
                 App app = kernel.Get<App>();
+                app.Logger.Info("Initializing UI Components");
                 app.InitializeComponent();
+                app.Logger.Info("Running Sparse App");
                 app.Run();
             }
         }
