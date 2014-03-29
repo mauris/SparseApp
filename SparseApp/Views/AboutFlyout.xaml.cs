@@ -109,6 +109,15 @@ namespace SparseApp.Views
                 }
             );
 
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "NLog",
+                    Website = "http://nlog-project.org/",
+                    License = SparseApp.Properties.Resources.LicenseNLog
+                }
+            );
+
             lstLicenses.DataContext = licenses.OrderBy(item => item.Name).ToList();
         }
 
