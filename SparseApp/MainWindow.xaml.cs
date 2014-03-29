@@ -35,11 +35,13 @@ namespace SparseApp
 
         protected Thread ConsoleUpdatingThread;
 
+        protected App app = (App)App.Current;
+
         public MainWindow()
         {
             InitializeComponent();
-            pluginManager = ((App)App.Current).PluginManager;
-            repositoryManager = ((App)App.Current).RepositoryManager;
+            pluginManager = app.PluginManager;
+            repositoryManager = app.RepositoryManager;
 
             pluginManager.LoadPlugins();
             repositoryManager.LoadRepositories();
