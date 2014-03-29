@@ -7,6 +7,7 @@ using System.Windows;
 using SparseApp.Repositories;
 using SparseApp.Plugins;
 using Ninject;
+using NLog;
 
 namespace SparseApp
 {
@@ -20,5 +21,8 @@ namespace SparseApp
 
         [Inject]
         public IPluginManager PluginManager { get; set; }
+
+        [Inject]
+        public Logger Logger { get; set; }
     }
 }
