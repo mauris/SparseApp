@@ -15,8 +15,10 @@ namespace SparseApp
         public static void Main(string[] args)
         {
             bool reset = false;
+            bool silentReset = false;
             OptionSet set = new OptionSet()
-                .Add("reset", v => reset = v != null);
+                .Add("reset", v => reset = v != null)
+                .Add("silent", v => silentReset = v != null);
 
             try
             {
@@ -28,11 +30,23 @@ namespace SparseApp
 
             if (reset)
             {
+                if (!silentReset)
+                {
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to reset Sparse and remove all repositories and plugins?\nWarning: This action is irreverisble.", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                }
                 using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
                 {
                     store.Remove();
                 }
-                Console.WriteLine("Sparse has been reset successfully.");
+
+                if (!silentReset)
+                {
+                    MessageBox.Show("Sparse has been reset to its original state.", "Reset successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             else
             {
