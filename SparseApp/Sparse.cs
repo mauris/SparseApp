@@ -30,23 +30,7 @@ namespace SparseApp
 
             if (reset)
             {
-                if (!silentReset)
-                {
-                    MessageBoxResult result = MessageBox.Show("Are you sure you want to reset Sparse and remove all repositories and plugins?\nWarning: This action is irreverisble.", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.No)
-                    {
-                        return;
-                    }
-                }
-                using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
-                {
-                    store.Remove();
-                }
-
-                if (!silentReset)
-                {
-                    MessageBox.Show("Sparse has been reset to its original state.", "Reset successful", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                ResetSparse(silentReset);
             }
             else
             {
@@ -54,6 +38,27 @@ namespace SparseApp
                 App app = kernel.Get<App>();
                 app.InitializeComponent();
                 app.Run();
+            }
+        }
+
+        public static void ResetSparse(bool isSilent)
+        {
+            if (!isSilent)
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to reset Sparse and remove all repositories and plugins?\nWarning: This action is irreverisble.", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+                store.Remove();
+            }
+
+            if (!isSilent)
+            {
+                MessageBox.Show("Sparse has been reset to its original state.", "Reset successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
