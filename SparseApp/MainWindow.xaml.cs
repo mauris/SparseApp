@@ -39,12 +39,30 @@ namespace SparseApp
 
         public MainWindow()
         {
+            app.Logger.Info("Initializing main window");
             InitializeComponent();
             pluginManager = app.PluginManager;
             repositoryManager = app.RepositoryManager;
 
-            pluginManager.LoadPlugins();
-            repositoryManager.LoadRepositories();
+            app.Logger.Info("Loading all plugins");
+            try
+            {
+                pluginManager.LoadPlugins();
+            }
+            catch (Exception ex)
+            {
+                app.Logger.FatalException("Exception occurred when loading plugins", ex);
+            }
+            
+            app.Logger.Info("Loading all repositories");
+            try
+            {
+                repositoryManager.LoadRepositories();
+            }
+            catch (Exception ex)
+            {
+                app.Logger.FatalException("Exception occurred when loading repositories", ex);
+            }
 
             lstAvailablePlugins.DataContext = pluginManager.Plugins;
             lstRepositories.DataContext = repositoryManager.Repositories;
@@ -55,6 +73,7 @@ namespace SparseApp
 
         private void SetWelcomeText()
         {
+            app.Logger.Info("Loading welcome text");
             txtPluginOutput.Text = @"Welcome to Sparse.
    ____                     
   / __/__  ___ ________ ___ 
@@ -122,6 +141,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
         {
             if (ConsoleUpdatingThread != null)
             {
+                app.Logger.Info("Existing console thread exists for {0}, aborting.", plugin.Name);
                 ConsoleUpdatingThread.Abort();
             }
 
@@ -150,6 +170,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     new Action(() => prgProgress.IsActive = false)
                 );
             };
+            app.Logger.Info("Starting new thread to update console from plugin command output");
             ConsoleUpdatingThread = new Thread(start);
             ConsoleUpdatingThread.Start();
         }
@@ -353,11 +374,21 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            app.Logger.Info("Window is closing, halting all plugin processes");
             foreach (KeyValuePair<string, IPlugin> item in pluginManager.Plugins)
             {
                 item.Value.Halt();
             }
-            repositoryManager.SaveRepositories();
+
+            app.Logger.Info("Saving all repositories");
+            try
+            {
+                repositoryManager.SaveRepositories();
+            }
+            catch (Exception ex)
+            {
+                app.Logger.FatalException("Failed to save repositories to file.", ex);
+            }
         }
 
         private void lstAvailablePlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
