@@ -32,15 +32,18 @@
                     <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
                     <StackPanel>
                         <TextBlock TextAlignment="Center" Margin="5">
-                            <Hyperlink NavigateUri="https://gitter.im/mauris/sparseapp" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                                <Hyperlink.Foreground>
-                                    <SolidColorBrush Color="Black"></SolidColorBrush>
-                                </Hyperlink.Foreground>
+                            <Hyperlink NavigateUri="https://gitter.im/mauris/sparseapp" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None" Foreground="Black">
                                 <TextBlock FontFamily="Wingdings">*</TextBlock> Chat Support
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>
+                
+                <TextBlock Grid.Column="1" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
+                    <Hyperlink NavigateUri="http://none.reset" RequestNavigate="Hyperlink_SparseReset" TextDecorations="None" Foreground="Black">
+                        <TextBlock FontFamily="Wingdings">N</TextBlock> Reset Sparse
+                    </Hyperlink>
+                </TextBlock>
             </Grid>
         </TabItem>
         <TabItem Header="Licenses">

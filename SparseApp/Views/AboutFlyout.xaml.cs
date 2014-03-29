@@ -116,5 +116,10 @@ namespace SparseApp.Views
         {
             System.Diagnostics.Process.Start(e.Uri.ToString());
         }
+
+        private void Hyperlink_SparseReset(object sender, RequestNavigateEventArgs e)
+        {
+            Sparse.ResetSparse(false);
+        }
     }
 }
