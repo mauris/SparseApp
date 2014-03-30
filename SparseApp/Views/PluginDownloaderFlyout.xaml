@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" Position="Right" 
              Margin="160,0,0,0" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth}"
-             Theme="Light" Header="Download Plugins" IsModal="True"
+             Theme="Light" Header="Plugin Downloader" IsModal="True"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,5 +14,11 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        
+        <TextBlock Margin="5" FontSize="12">
+            Plugin Downloader will help you download ready-made plugins available on the <Hyperlink>mauris/SparseApp.Plugins</Hyperlink> public repository and use them out of the box.
+        </TextBlock>
+
+        <TextBox Padding="10" Margin="5" FontSize="14" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'"></TextBox>
     </Grid>
 </controls:Flyout>
