@@ -126,9 +126,21 @@ namespace SparseApp.Views
             System.Diagnostics.Process.Start(e.Uri.ToString());
         }
 
-        private void Hyperlink_SparseReset(object sender, RequestNavigateEventArgs e)
+        private void ResetSparseHyperlink_Click(object sender, RoutedEventArgs e)
         {
             Sparse.ResetSparse(false);
+        }
+
+        private void OpenLogHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "/sparse.log"))
+            {
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/sparse.log");
+            }
+            else
+            {
+                MessageBox.Show("Log file is empty. Surprisingly. ", "Log file not found", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
