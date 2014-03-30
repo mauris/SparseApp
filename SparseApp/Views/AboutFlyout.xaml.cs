@@ -118,6 +118,15 @@ namespace SparseApp.Views
                 }
             );
 
+            licenses.Add(
+                new OpenSourceLicense()
+                {
+                    Name = "Json.NET",
+                    Website = "http://james.newtonking.com/json",
+                    License = SparseApp.Properties.Resources.LicenseJsonNet
+                }
+            );
+
             lstLicenses.DataContext = licenses.OrderBy(item => item.Name).ToList();
         }
 
