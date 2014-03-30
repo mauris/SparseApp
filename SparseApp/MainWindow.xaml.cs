@@ -114,11 +114,13 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 IPlugin plugin = (IPlugin)lstPlugins.SelectedItem;
+                app.Logger.Info("Running plugin \"{0}\" at {1}", plugin.Name, repository.Path);
 
                 plugin.Run(repository.Path);
 
                 if (this.Width == 480)
                 {
+                    app.Logger.Info("Opening flyout for console output for {0}", plugin.Name);
                     flyOutput.IsOpen = true;
                 }
 
@@ -169,8 +171,9 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     DispatcherPriority.Normal,
                     new Action(() => prgProgress.IsActive = false)
                 );
+                app.Logger.Info("Console updating thread stopped for {0} as plugin stopped.", plugin.Name);
             };
-            app.Logger.Info("Starting new thread to update console from plugin command output");
+            app.Logger.Info("Starting new thread to update console for plugin {0}", plugin.Name);
             ConsoleUpdatingThread = new Thread(start);
             ConsoleUpdatingThread.Start();
         }
@@ -233,6 +236,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             if (lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
+                app.Logger.Info("Opening repository folder at {0}", repository.Path);
                 Process.Start(repository.Path);
             }
         }
@@ -243,6 +247,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 repositoryManager.Repositories.Remove(repository);
+                app.Logger.Info("Repository at {0} removed from Sparse", repository.Path);
                 lstRepositories.Items.Refresh();
             }
         }
