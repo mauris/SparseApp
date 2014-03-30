@@ -39,7 +39,14 @@ namespace SparseApp
                 app.Logger.Info("Initializing UI Components");
                 app.InitializeComponent();
                 app.Logger.Info("Running Sparse App");
-                app.Run();
+                try
+                {
+                    app.Run();
+                }
+                catch (Exception ex)
+                {
+                    app.Logger.FatalException("Uncaught exception", ex);
+                }
             }
         }
 
