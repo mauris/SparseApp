@@ -408,10 +408,12 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 KeyValuePair<string, IPlugin> entry = (KeyValuePair<string, IPlugin>)lstAvailablePlugins.SelectedItem;
                 if (repository.Plugins.Count(item => item == entry.Key) == 0)
                 {
+                    app.Logger.Info("Adding plugin {0} to repository {1}", entry.Value.Name, repository.Basename);
                     repository.Plugins.Add(entry.Key);
                 }
                 else
                 {
+                    app.Logger.Info("Removing plugin {0} from repository {1}", entry.Value.Name, repository.Basename);
                     repository.Plugins.RemoveAll(item => item == entry.Key);
                 }
 
@@ -453,6 +455,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void ShowAboutCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            app.Logger.Info("Opening the About flyout");
             flyAbout.IsOpen = true;
         }
 
@@ -464,6 +467,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             bool? result = dialog.ShowDialog(this);
             if (result == true)
             {
+                app.Logger.Info("Importing {0} files from open file dialog", dialog.FileNames.Count());
                 ImportPlugins(dialog.FileNames.ToList());
             }
         }
@@ -548,6 +552,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     if (Directory.Exists(file))
                     {
                         // dropped is a path, add as repository
+                        app.Logger.Info("Adding repository from path {0}", file);
                         RepositoryAdd(file);
                         lstRepositories.Items.Refresh();
                     }
@@ -559,6 +564,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
                 if (filesToImport.Count > 0)
                 {
+                    app.Logger.Info("Importing {0} files from file drop", filesToImport.Count);
                     ImportPlugins(filesToImport);
                 }
             }
