@@ -191,6 +191,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void RepositoryAdd(string path)
         {
+            app.Logger.Info("Adding new repository from path {0}", path);
             if (repositoryManager.Repositories.Where(repository => repository.Path == path).Count() == 0)
             {
                 Repository repository = new Repository()
@@ -200,9 +201,11 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
                 repositoryManager.Repositories.Add(repository);
                 lstRepositories.Items.Refresh();
+                app.Logger.Info("Path at {0} has been added", path);
             }
             else
             {
+                app.Logger.Info("Repository at path has already been added in Sparse.", path);
                 this.ShowMessageAsync("Repository already exists", "The selected folder \"" + path + "\" has already been registered in Sparse.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "OK" });
             }
         }
@@ -214,6 +217,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 IPlugin plugin = (IPlugin)lstPlugins.SelectedItem;
 
+                app.Logger.Info("Sparse confirming the uninstallation of plugin {0} from repository {1}", plugin.Name, repository.Path);
                 var result = await this.ShowMessageAsync("Uninstall Plugin \"" + plugin.Name + "\" from repository", "Are you sure you want to uninstall plugin \"" + plugin.Name + "\" from repository \"" + repository.Basename + "\"?", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
 
                 if (result == MessageDialogResult.Affirmative)
@@ -222,6 +226,11 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     repository.Plugins.RemoveAll(item => (item == key));
 
                     RefreshPluginsForRepository(repository);
+                    app.Logger.Info("Uninstalled plugin {0} from repository {1}", plugin.Name, repository.Path);
+                }
+                else
+                {
+                    app.Logger.Info("User cancelled uninstallation of plugin {0} from repository {1}", plugin.Name, repository.Path);
                 }
             }
         }
@@ -264,6 +273,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void btnManagePlugins_Click(object sender, RoutedEventArgs e)
         {
+            app.Logger.Info("Opening plugin manager");
             flyPluginManager.IsOpen = true;
         }
 
