@@ -1168,8 +1168,7 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
-		<row><td>sam_ma_1_sam_mauris_yong</td><td>ProgramMenuFolder</td><td>SAM-MA~1|Sam-Mauris Yong</td><td/><td>1</td><td/></row>
-		<row><td>sparse</td><td>sam_ma_1_sam_mauris_yong</td><td>Sparse</td><td/><td>1</td><td/></row>
+		<row><td>sparse</td><td>ProgramMenuFolder</td><td>Sparse</td><td/><td>1</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -3985,7 +3984,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{CCA0A2BB-EFA8-4E0F-8604-08454D219B6E}</td></row>
 		<row><td>ISUSSignature</td><td>{C204A484-D927-49DC-87F7-C747E73E0A81}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewISToday,viewSystemSearch,viewObjects,viewRelease,viewServices,viewCustomActions</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewISToday,viewSystemSearch,viewObjects,viewRelease,viewServices,viewCustomActions,viewDependencies,viewShortcuts</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
