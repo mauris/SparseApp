@@ -526,6 +526,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
+                app.Logger.Info("Drag operation started with files, showing drag drop indicator on window.");
                 pnlDragDropIndicator.Visibility = System.Windows.Visibility.Visible;
                 e.Effects = DragDropEffects.Copy;
             }
@@ -537,6 +538,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void MetroWindow_DragLeave(object sender, DragEventArgs e)
         {
+            app.Logger.Info("Drag operation left, hiding drag drop indicator from window.");
             pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
         }
 
@@ -554,13 +556,13 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                         // dropped is a path, add as repository
                         app.Logger.Info("Adding repository from path {0}", file);
                         RepositoryAdd(file);
-                        lstRepositories.Items.Refresh();
                     }
                     else if (File.Exists(file) && Path.GetExtension(file).Equals(".yml", StringComparison.InvariantCultureIgnoreCase))
                     {
                         filesToImport.Add(file);
                     }
                 }
+                lstRepositories.Items.Refresh();
 
                 if (filesToImport.Count > 0)
                 {
@@ -568,6 +570,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     ImportPlugins(filesToImport);
                 }
             }
+            app.Logger.Info("Drop operation occurred, hiding drag drop indicator from window.");
             pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
