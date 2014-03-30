@@ -381,14 +381,8 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             }
 
             app.Logger.Info("Saving all repositories");
-            try
-            {
-                repositoryManager.SaveRepositories();
-            }
-            catch (Exception ex)
-            {
-                app.Logger.FatalException("Failed to save repositories to file.", ex);
-            }
+            repositoryManager.SaveRepositories();
+            app.Logger.Info("Total of {0} repositories saved", repositoryManager.Repositories.Count);
         }
 
         private void lstAvailablePlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
