@@ -573,6 +573,11 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             app.Logger.Info("Drop operation occurred, hiding drag drop indicator from window.");
             pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
         }
+
+        private void AddPluginFromGithubCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            flyPluginDownloader.IsOpen = true;
+        }
     }
 
     public class SelectedIndexConverter : IValueConverter
