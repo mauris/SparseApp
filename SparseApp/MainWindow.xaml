@@ -13,11 +13,13 @@
     <controls:MetroWindow.Resources>
         <RoutedUICommand x:Key="ShowAboutCommand" Text="About Sparse"></RoutedUICommand>
         <RoutedUICommand x:Key="AddPluginFromFileCommand" Text="From File(s)..."></RoutedUICommand>
+        <RoutedUICommand x:Key="AddPluginFromGithubCommand" Text="From Github"></RoutedUICommand>
         <s:SelectedIndexConverter x:Key="SelectedIndexConverter"></s:SelectedIndexConverter>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.CommandBindings>
         <CommandBinding Command="{StaticResource ShowAboutCommand}" Executed="ShowAboutCommand_Executed"></CommandBinding>
         <CommandBinding Command="{StaticResource AddPluginFromFileCommand}" Executed="AddPluginFromFileCommand_Executed"></CommandBinding>
+        <CommandBinding Command="{StaticResource AddPluginFromGithubCommand}" Executed="AddPluginFromGithubCommand_Executed"></CommandBinding>
     </controls:MetroWindow.CommandBindings>
     
     <controls:MetroWindow.WindowCommands>
@@ -50,6 +52,8 @@
             </controls:Flyout>
             
             <sv:AboutFlyout x:Name="flyAbout"></sv:AboutFlyout>
+            
+            <sv:PluginDownloaderFlyout x:Name="flyPluginDownloader"></sv:PluginDownloaderFlyout>
             
             <controls:Flyout Name="flyPluginManager" Position="Right" Width="400" Theme="Adapt" Header="Plugins" IsModal="True">
                 <Grid Margin="5">
@@ -117,6 +121,7 @@
                             <Button.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Command="{StaticResource AddPluginFromFileCommand}"></MenuItem>
+                                    <MenuItem Command="{StaticResource AddPluginFromGithubCommand}"></MenuItem>
                                 </ContextMenu>
                             </Button.ContextMenu>
                             <StackPanel Orientation="Horizontal">
