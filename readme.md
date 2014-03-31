@@ -1,6 +1,8 @@
 #Sparse
 > Sparse is a UI tool for running repetitive CLI tools at a double click.
 
+![](http://i.imgur.com/oeH7hYx.gif)
+
 Discussion and Support at [![Gitter chat](https://badges.gitter.im/mauris/SparseApp.png)](https://gitter.im/mauris/SparseApp)
 
 1. Register your repositories and working folders
@@ -8,16 +10,6 @@ Discussion and Support at [![Gitter chat](https://badges.gitter.im/mauris/Sparse
 3. Double click on the plugin to run
 4. ???
 5. PROFIT!!!
-
-We are at 95% progress!
-
-##Screenshots
-
-22 Mar 2014 screenshots.
-
-![](http://i.imgur.com/Da0nR1Y.png)
-![](http://i.imgur.com/FtK90n9.png)
-![](http://i.imgur.com/k29sZav.png)
 
 ##Specs
 
@@ -27,6 +19,7 @@ Sparse is built with Microsoft .NET Framework 4.0 Full, InstallShield LE for Vis
 
 Sparse uses the following open source libraries to achieve awesomeness:
 
+- [Json.NET](http://james.newtonking.com/json) - JSON parsing for Github API interaction
 - [MahApps.Metro](https://github.com/MahApps/MahApps.Metro) - Awesome WPF Metro styling
 - [Mono.Options](http://www.nuget.org/packages/Mono.Options) - Arguments parsing
 - [Microsoft Async](https://www.nuget.org/packages/Microsoft.Bcl.Async) - for using `async` and `await` in Microsoft .NET 4.0 Framework
