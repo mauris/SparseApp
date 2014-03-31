@@ -100,6 +100,12 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
 
+                if (ConsoleUpdatingThread != null)
+                {
+                    app.Logger.Info("Switching repository, so halt console updating thread.");
+                    ConsoleUpdatingThread.Abort();
+                    ConsoleUpdatingThread = null;
+                }
                 txtPluginOutput.Text = "";
                 txtStatus.Text = "Select a plugin";
                 lstPlugins.SelectedIndex = -1;
@@ -145,6 +151,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             {
                 app.Logger.Info("Existing console thread exists for {0}, aborting.", plugin.Name);
                 ConsoleUpdatingThread.Abort();
+                ConsoleUpdatingThread = null;
             }
 
             txtStatus.Text = "Running...";
