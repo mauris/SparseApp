@@ -19,6 +19,17 @@
             Plugin Downloader will help you download ready-made plugins available on the <Hyperlink>mauris/SparseApp.Plugins</Hyperlink> public repository and use them out of the box.
         </TextBlock>
 
-        <TextBox Padding="10" Margin="5" FontSize="14" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'"></TextBox>
+        <TextBox Padding="10" Margin="5" FontSize="14" Grid.Row="1" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'"></TextBox>
+
+        <ListBox Name="lstSearchResult" Margin="5" Grid.Row="2" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <TextBlock FontSize="13" Text="{Binding Name}"></TextBlock>
+                        <TextBlock FontSize="8" Text="{Binding Status}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </controls:Flyout>
