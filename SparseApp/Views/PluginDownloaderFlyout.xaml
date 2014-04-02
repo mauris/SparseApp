@@ -15,11 +15,13 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
-        <TextBlock Margin="5" FontSize="12">
+        <TextBlock Margin="5" FontSize="12" TextWrapping="Wrap">
             Plugin Downloader will help you download ready-made plugins available on the <Hyperlink>mauris/SparseApp.Plugins</Hyperlink> public repository and use them out of the box.
         </TextBlock>
 
-        <TextBox Padding="10" Margin="5" FontSize="14" Grid.Row="1" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'"></TextBox>
+        <Border Grid.Row="1" BorderThickness="1" Margin="5" BorderBrush="{StaticResource TextBoxBorderBrush}" Padding="10">
+            <TextBox BorderThickness="0" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'"></TextBox>
+        </Border>
 
         <ListBox Name="lstSearchResult" Margin="5" Grid.Row="2" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
