@@ -20,7 +20,7 @@
         </TextBlock>
 
         <Border Grid.Row="1" BorderThickness="1" Margin="5" BorderBrush="{StaticResource TextBoxBorderBrush}" Padding="10">
-            <TextBox BorderThickness="0" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'"></TextBox>
+            <TextBox Name="txtSearch" BorderThickness="0" controls:TextboxHelper.Watermark="Enter search keyword such as 'php' or 'bower'" KeyUp="txtSearch_KeyUp"></TextBox>
         </Border>
 
         <ListBox Name="lstSearchResult" Margin="5" Grid.Row="2" ItemsSource="{Binding}">
