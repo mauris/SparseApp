@@ -24,6 +24,8 @@ namespace SparseApp.Views
     {
         protected Thread searchAction;
 
+        private Github repository = new Github();
+
         public PluginDownloaderFlyout()
         {
             InitializeComponent();
@@ -45,9 +47,12 @@ namespace SparseApp.Views
         {
             try
             {
-                Thread.Sleep(500);
+                Thread.Sleep(200);
                 string term = "";
                 Dispatcher.Invoke(new Action(() => term = txtSearch.Text));
+
+                List<PluginFile> files = repository.Search(term);
+                Dispatcher.Invoke(new Action(() => lstSearchResult.DataContext = files));
             }
             catch (ThreadAbortException)
             {
