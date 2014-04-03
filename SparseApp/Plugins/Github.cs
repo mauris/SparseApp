@@ -26,6 +26,7 @@ namespace SparseApp.Plugins
             if (!lastSearch.HasValue || DateTime.Compare(lastSearch.Value, DateTime.Now.AddHours(72)) > 0)
             {
                 DownloadList();
+                lastSearch = DateTime.Now;
             }
 
             return files.Where(item => item.Name.ToLower().Contains(term.ToLower())).ToList();
