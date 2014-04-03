@@ -28,7 +28,7 @@
                 <DataTemplate>
                     <Grid Margin="5">
                         <TextBlock FontSize="13" Text="{Binding Name}"></TextBlock>
-                        <TextBlock FontSize="8" Text="{Binding Status}"></TextBlock>
+                        <TextBlock FontSize="8" Text="{Binding Hash}"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
