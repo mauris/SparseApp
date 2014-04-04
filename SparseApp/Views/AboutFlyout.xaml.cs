@@ -16,6 +16,9 @@ using System.Reflection;
 using SparseApp.Models;
 using System.Yaml.Serialization;
 using System.IO;
+using Ninject;
+using SparseApp.Updates;
+using System.Threading;
 
 namespace SparseApp.Views
 {
@@ -24,13 +27,14 @@ namespace SparseApp.Views
     /// </summary>
     public partial class AboutFlyout : Flyout
     {
+        private Thread updateThread;
+
+        [Inject]
+        public UpdateService Updater { get; set; }
+
         public AboutFlyout()
         {
             InitializeComponent();
-
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            txtAppVersion.Text = "version " + assembly.GetName().Version.ToString();
-            LoadLicenses();
         }
 
         private void LoadLicenses()
@@ -150,6 +154,35 @@ namespace SparseApp.Views
             {
                 MessageBox.Show("Log file is empty. Surprisingly. ", "Log file not found", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void UpdateCheck(object version)
+        {
+            bool updateAvailable = Updater.Check(version.ToString());
+            Dispatcher.Invoke(new Action(() => btnUpdateAvailable.Visibility = updateAvailable ? Visibility.Visible : Visibility.Collapsed));
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabControl origin = (TabControl)sender;
+            if(origin.SelectedIndex == 2)
+            {
+                if (updateThread == null || !updateThread.IsAlive)
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    updateThread = new Thread(new ParameterizedThreadStart(UpdateCheck));
+                    updateThread.IsBackground = true;
+                    updateThread.Start(assembly.GetName().Version.ToString());
+                }
+            }
+        }
+
+        private void Flyout_Initialized(object sender, EventArgs e)
+        {
+            ((App)App.Current).Kernel.Inject(this);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            txtAppVersion.Text = "version " + assembly.GetName().Version.ToString();
+            LoadLicenses();
         }
     }
 }

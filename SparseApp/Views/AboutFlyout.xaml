@@ -6,9 +6,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"  Position="Right" 
              Margin="160,0,0,0" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth}"
-             Theme="Light" Header="About" IsModal="True"
+             Theme="Light" Header="About" IsModal="True" Initialized="Flyout_Initialized"
              d:DesignHeight="300" d:DesignWidth="300">
-    <TabControl>
+    <TabControl SelectionChanged="TabControl_SelectionChanged">
         <TabControl.Resources>
             <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
                 <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="12"></Setter>
@@ -85,6 +85,13 @@
                         </TextBox>
                     </Grid>
                 </Border>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Update">
+            <Grid>
+                <Button Name="btnUpdateAvailable" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    Update Available
+                </Button>
             </Grid>
         </TabItem>
     </TabControl>
