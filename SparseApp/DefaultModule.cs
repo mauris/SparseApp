@@ -6,6 +6,9 @@ using Ninject.Modules;
 using SparseApp.Plugins;
 using SparseApp.Repositories;
 using NLog;
+using SparseApp.Updates;
+using Ninject;
+using Ninject.Activation;
 
 namespace SparseApp
 {
@@ -17,10 +20,11 @@ namespace SparseApp
             Bind<IPluginManager>().To<PluginManager>();
             Bind<IRepositoryManager>().To<RepositoryManager>();
             Bind<Logger>().ToMethod(
-                delegate(Ninject.Activation.IContext ctx) {
+                delegate(IContext ctx) {
                     return LogManager.GetCurrentClassLogger();
                 }
             ).InSingletonScope();
+            Bind<UpdateService>().ToSelf();
         }
     }
 }
