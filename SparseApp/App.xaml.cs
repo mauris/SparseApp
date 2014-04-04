@@ -17,11 +17,12 @@ namespace SparseApp
     public partial class App : Application
     {
         [Inject]
-        public Logger Logger { get; set; }
+        public IKernel Kernel { get; set; }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             StandardKernel kernel = new StandardKernel(new DefaultModule());
+            kernel.Inject(this);
             MainWindow mainWindow = kernel.Get<MainWindow>();
             mainWindow.Load();
             mainWindow.Show();
