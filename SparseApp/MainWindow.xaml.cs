@@ -21,6 +21,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using Ninject;
+using NLog;
 
 namespace SparseApp
 {
@@ -29,43 +31,48 @@ namespace SparseApp
     /// </summary>
     public partial class MainWindow
     {
-        protected IRepositoryManager repositoryManager;
+        [Inject]
+        public IRepositoryManager RepositoryManager { get; set; }
 
-        protected IPluginManager pluginManager;
+        [Inject]
+        public IPluginManager PluginManager { get; set; }
+
+        [Inject]
+        public Logger Logger { get; set; }
 
         protected Thread ConsoleUpdatingThread;
 
-        protected App app = (App)App.Current;
-
         public MainWindow()
         {
-            app.Logger.Info("Initializing main window");
+        }
+
+        public void Load()
+        {
+            Logger.Info("Initializing main window");
             InitializeComponent();
-            pluginManager = app.PluginManager;
-            repositoryManager = app.RepositoryManager;
 
-            app.Logger.Info("Loading all plugins");
+            Logger.Info("Loading all plugins");
             try
             {
-                pluginManager.LoadPlugins();
+                PluginManager.LoadPlugins();
             }
             catch (Exception ex)
             {
-                app.Logger.FatalException("Exception occurred when loading plugins", ex);
+                Logger.FatalException("Exception occurred when loading plugins", ex);
             }
-            
-            app.Logger.Info("Loading all repositories");
+
+            Logger.Info("Loading all repositories");
             try
             {
-                repositoryManager.LoadRepositories();
+                RepositoryManager.LoadRepositories();
             }
             catch (Exception ex)
             {
-                app.Logger.FatalException("Exception occurred when loading repositories", ex);
+                Logger.FatalException("Exception occurred when loading repositories", ex);
             }
 
-            lstAvailablePlugins.DataContext = pluginManager.Plugins;
-            lstRepositories.DataContext = repositoryManager.Repositories;
+            lstAvailablePlugins.DataContext = PluginManager.Plugins;
+            lstRepositories.DataContext = RepositoryManager.Repositories;
             txtStatus.Text = "Select a repository";
 
             SetWelcomeText();
@@ -73,7 +80,7 @@ namespace SparseApp
 
         private void SetWelcomeText()
         {
-            app.Logger.Info("Loading welcome text");
+            Logger.Info("Loading welcome text");
             txtPluginOutput.Text = @"Welcome to Sparse.
    ____                     
   / __/__  ___ ________ ___ 
@@ -83,8 +90,8 @@ namespace SparseApp
 
 When plugin runs, the output will be shown here.
 
-You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManager.Repositories.Count.ToString()) + " " + (repositoryManager.Repositories.Count == 1 ? "repository" : "repositories") + " registered and "
-           + (pluginManager.Plugins.Count == 0 ? "no" : pluginManager.Plugins.Count.ToString()) + " " + (pluginManager.Plugins.Count == 1 ? "plugin" : "plugins") + " available.";
+You have " + (RepositoryManager.Repositories.Count == 0 ? "no" : RepositoryManager.Repositories.Count.ToString()) + " " + (RepositoryManager.Repositories.Count == 1 ? "repository" : "repositories") + " registered and "
+           + (PluginManager.Plugins.Count == 0 ? "no" : PluginManager.Plugins.Count.ToString()) + " " + (PluginManager.Plugins.Count == 1 ? "plugin" : "plugins") + " available.";
         }
 
         private void lstRepositories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -102,7 +109,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
                 if (ConsoleUpdatingThread != null)
                 {
-                    app.Logger.Info("Switching repository, so halt console updating thread.");
+                    Logger.Info("Switching repository, so halt console updating thread.");
                     ConsoleUpdatingThread.Abort();
                     ConsoleUpdatingThread = null;
                 }
@@ -120,13 +127,13 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 IPlugin plugin = (IPlugin)lstPlugins.SelectedItem;
-                app.Logger.Info("Running plugin \"{0}\" at {1}", plugin.Name, repository.Path);
+                Logger.Info("Running plugin \"{0}\" at {1}", plugin.Name, repository.Path);
 
                 plugin.Run(repository.Path);
 
                 if (this.Width == 480)
                 {
-                    app.Logger.Info("Opening flyout for console output for {0}", plugin.Name);
+                    Logger.Info("Opening flyout for console output for {0}", plugin.Name);
                     flyOutput.IsOpen = true;
                 }
 
@@ -149,7 +156,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
         {
             if (ConsoleUpdatingThread != null)
             {
-                app.Logger.Info("Existing console thread exists for {0}, aborting.", plugin.Name);
+                Logger.Info("Existing console thread exists for {0}, aborting.", plugin.Name);
                 ConsoleUpdatingThread.Abort();
                 ConsoleUpdatingThread = null;
             }
@@ -178,9 +185,9 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     DispatcherPriority.Normal,
                     new Action(() => prgProgress.IsActive = false)
                 );
-                app.Logger.Info("Console updating thread stopped for {0} as plugin stopped.", plugin.Name);
+                Logger.Info("Console updating thread stopped for {0} as plugin stopped.", plugin.Name);
             };
-            app.Logger.Info("Starting new thread to update console for plugin {0}", plugin.Name);
+            Logger.Info("Starting new thread to update console for plugin {0}", plugin.Name);
             ConsoleUpdatingThread = new Thread(start);
             ConsoleUpdatingThread.Start();
         }
@@ -198,21 +205,21 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void RepositoryAdd(string path)
         {
-            app.Logger.Info("Adding new repository from path {0}", path);
-            if (repositoryManager.Repositories.Where(repository => repository.Path == path).Count() == 0)
+            Logger.Info("Adding new repository from path {0}", path);
+            if (RepositoryManager.Repositories.Where(repository => repository.Path == path).Count() == 0)
             {
                 Repository repository = new Repository()
                 {
                     Path = path
                 };
 
-                repositoryManager.Repositories.Add(repository);
+                RepositoryManager.Repositories.Add(repository);
                 lstRepositories.Items.Refresh();
-                app.Logger.Info("Path at {0} has been added", path);
+                Logger.Info("Path at {0} has been added", path);
             }
             else
             {
-                app.Logger.Info("Repository at path has already been added in Sparse.", path);
+                Logger.Info("Repository at path has already been added in Sparse.", path);
                 this.ShowMessageAsync("Repository already exists", "The selected folder \"" + path + "\" has already been registered in Sparse.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "OK" });
             }
         }
@@ -224,20 +231,20 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 Repository repository = (Repository)lstRepositories.SelectedItem;
                 IPlugin plugin = (IPlugin)lstPlugins.SelectedItem;
 
-                app.Logger.Info("Sparse confirming the uninstallation of plugin {0} from repository {1}", plugin.Name, repository.Path);
+                Logger.Info("Sparse confirming the uninstallation of plugin {0} from repository {1}", plugin.Name, repository.Path);
                 var result = await this.ShowMessageAsync("Uninstall Plugin \"" + plugin.Name + "\" from repository", "Are you sure you want to uninstall plugin \"" + plugin.Name + "\" from repository \"" + repository.Basename + "\"?", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No" });
 
                 if (result == MessageDialogResult.Affirmative)
                 {
-                    string key = pluginManager.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
+                    string key = PluginManager.Plugins.Where(pair => (plugin == pair.Value)).Select(pair => pair.Key).FirstOrDefault();
                     repository.Plugins.RemoveAll(item => (item == key));
 
                     RefreshPluginsForRepository(repository);
-                    app.Logger.Info("Uninstalled plugin {0} from repository {1}", plugin.Name, repository.Path);
+                    Logger.Info("Uninstalled plugin {0} from repository {1}", plugin.Name, repository.Path);
                 }
                 else
                 {
-                    app.Logger.Info("User cancelled uninstallation of plugin {0} from repository {1}", plugin.Name, repository.Path);
+                    Logger.Info("User cancelled uninstallation of plugin {0} from repository {1}", plugin.Name, repository.Path);
                 }
             }
         }
@@ -252,7 +259,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             if (lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
-                app.Logger.Info("Opening repository folder at {0}", repository.Path);
+                Logger.Info("Opening repository folder at {0}", repository.Path);
                 Process.Start(repository.Path);
             }
         }
@@ -262,8 +269,8 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             if (lstRepositories.SelectedItem != null)
             {
                 Repository repository = (Repository)lstRepositories.SelectedItem;
-                repositoryManager.Repositories.Remove(repository);
-                app.Logger.Info("Repository at {0} removed from Sparse", repository.Path);
+                RepositoryManager.Repositories.Remove(repository);
+                Logger.Info("Repository at {0} removed from Sparse", repository.Path);
                 lstRepositories.Items.Refresh();
             }
         }
@@ -280,7 +287,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void btnManagePlugins_Click(object sender, RoutedEventArgs e)
         {
-            app.Logger.Info("Opening plugin manager");
+            Logger.Info("Opening plugin manager");
             flyPluginManager.IsOpen = true;
         }
 
@@ -294,7 +301,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 {
                     repository.Plugins.Add(entry.Key);
 
-                    List<IPlugin> values = pluginManager.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+                    List<IPlugin> values = PluginManager.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
                     lstPlugins.DataContext = values;
                 }
                 else
@@ -312,7 +319,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 List<Repository> inUseRepos = new List<Repository>();
 
                 // do check for repositories that are using this plugin
-                foreach (Repository repository in repositoryManager.Repositories)
+                foreach (Repository repository in RepositoryManager.Repositories)
                 {
                     if (repository.Plugins.Contains(entry.Key))
                     {
@@ -335,14 +342,14 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     {
                         repository.Plugins.RemoveAll(item => item == entry.Key);
                     }
-                    pluginManager.RemovePlugin(entry.Key); // remove plugin
+                    PluginManager.RemovePlugin(entry.Key); // remove plugin
                     lstAvailablePlugins.Items.Refresh(); // refresh view
 
                     // refresh plugins for current repo
                     if (lstRepositories.SelectedItem != null)
                     {
                         Repository currentRepo = (Repository)lstRepositories.SelectedItem;
-                        List<IPlugin> values = pluginManager.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+                        List<IPlugin> values = PluginManager.Plugins.Where(item => currentRepo.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
                         lstPlugins.DataContext = values;
                     }
                 }
@@ -380,7 +387,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
                 string filename = r.Replace(plugin.Name, "");
 
-                pluginManager.AddPlugin(filename, plugin);
+                PluginManager.AddPlugin(filename, plugin);
                 lstAvailablePlugins.Items.Refresh();
 
                 btnFormAddPluginCancel_Click(sender, e);
@@ -396,15 +403,15 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            app.Logger.Info("Window is closing, halting all plugin processes");
-            foreach (KeyValuePair<string, IPlugin> item in pluginManager.Plugins)
+            Logger.Info("Window is closing, halting all plugin processes");
+            foreach (KeyValuePair<string, IPlugin> item in PluginManager.Plugins)
             {
                 item.Value.Halt();
             }
 
-            app.Logger.Info("Saving all repositories");
-            repositoryManager.SaveRepositories();
-            app.Logger.Info("Total of {0} repositories saved", repositoryManager.Repositories.Count);
+            Logger.Info("Saving all repositories");
+            RepositoryManager.SaveRepositories();
+            Logger.Info("Total of {0} repositories saved", RepositoryManager.Repositories.Count);
         }
 
         private void lstAvailablePlugins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -415,12 +422,12 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                 KeyValuePair<string, IPlugin> entry = (KeyValuePair<string, IPlugin>)lstAvailablePlugins.SelectedItem;
                 if (repository.Plugins.Count(item => item == entry.Key) == 0)
                 {
-                    app.Logger.Info("Adding plugin {0} to repository {1}", entry.Value.Name, repository.Basename);
+                    Logger.Info("Adding plugin {0} to repository {1}", entry.Value.Name, repository.Basename);
                     repository.Plugins.Add(entry.Key);
                 }
                 else
                 {
-                    app.Logger.Info("Removing plugin {0} from repository {1}", entry.Value.Name, repository.Basename);
+                    Logger.Info("Removing plugin {0} from repository {1}", entry.Value.Name, repository.Basename);
                     repository.Plugins.RemoveAll(item => item == entry.Key);
                 }
 
@@ -430,7 +437,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void RefreshPluginsForRepository(Repository repository)
         {
-            List<IPlugin> values = pluginManager.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
+            List<IPlugin> values = PluginManager.Plugins.Where(item => repository.Plugins.Contains(item.Key)).Select(item => item.Value).ToList<IPlugin>();
             lstPlugins.DataContext = values;
 
             if (values.Count > 0)
@@ -462,7 +469,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void ShowAboutCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            app.Logger.Info("Opening the About flyout");
+            Logger.Info("Opening the About flyout");
             flyAbout.IsOpen = true;
         }
 
@@ -474,7 +481,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
             bool? result = dialog.ShowDialog(this);
             if (result == true)
             {
-                app.Logger.Info("Importing {0} files from open file dialog", dialog.FileNames.Count());
+                Logger.Info("Importing {0} files from open file dialog", dialog.FileNames.Count());
                 ImportPlugins(dialog.FileNames.ToList());
             }
         }
@@ -498,7 +505,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     try
                     {
                         controller.SetMessage("Importing " + file);
-                        pluginManager.ImportFile(file);
+                        PluginManager.ImportFile(file);
                         imported = true;
                         await TaskEx.Delay(100);
                     }
@@ -533,7 +540,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                app.Logger.Info("Drag operation started with files, showing drag drop indicator on window.");
+                Logger.Info("Drag operation started with files, showing drag drop indicator on window.");
                 pnlDragDropIndicator.Visibility = System.Windows.Visibility.Visible;
                 e.Effects = DragDropEffects.Copy;
             }
@@ -545,7 +552,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
         private void MetroWindow_DragLeave(object sender, DragEventArgs e)
         {
-            app.Logger.Info("Drag operation left, hiding drag drop indicator from window.");
+            Logger.Info("Drag operation left, hiding drag drop indicator from window.");
             pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
         }
 
@@ -561,7 +568,7 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
                     if (Directory.Exists(file))
                     {
                         // dropped is a path, add as repository
-                        app.Logger.Info("Adding repository from path {0}", file);
+                        Logger.Info("Adding repository from path {0}", file);
                         RepositoryAdd(file);
                     }
                     else if (File.Exists(file) && Path.GetExtension(file).Equals(".yml", StringComparison.InvariantCultureIgnoreCase))
@@ -573,11 +580,11 @@ You have " + (repositoryManager.Repositories.Count == 0 ? "no" : repositoryManag
 
                 if (filesToImport.Count > 0)
                 {
-                    app.Logger.Info("Importing {0} files from file drop", filesToImport.Count);
+                    Logger.Info("Importing {0} files from file drop", filesToImport.Count);
                     ImportPlugins(filesToImport);
                 }
             }
-            app.Logger.Info("Drop operation occurred, hiding drag drop indicator from window.");
+            Logger.Info("Drop operation occurred, hiding drag drop indicator from window.");
             pnlDragDropIndicator.Visibility = System.Windows.Visibility.Collapsed;
         }
 

@@ -13,13 +13,14 @@ namespace SparseApp
     {
         public override void Load()
         {
+            Bind<MainWindow>().ToSelf();
             Bind<IPluginManager>().To<PluginManager>();
             Bind<IRepositoryManager>().To<RepositoryManager>();
             Bind<Logger>().ToMethod(
                 delegate(Ninject.Activation.IContext ctx) {
                     return LogManager.GetCurrentClassLogger();
                 }
-            );
+            ).InSingletonScope();
         }
     }
 }

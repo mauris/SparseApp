@@ -17,12 +17,14 @@ namespace SparseApp
     public partial class App : Application
     {
         [Inject]
-        public IRepositoryManager RepositoryManager { get; set; }
-
-        [Inject]
-        public IPluginManager PluginManager { get; set; }
-
-        [Inject]
         public Logger Logger { get; set; }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            StandardKernel kernel = new StandardKernel(new DefaultModule());
+            MainWindow mainWindow = kernel.Get<MainWindow>();
+            mainWindow.Load();
+            mainWindow.Show();
+        }
     }
 }

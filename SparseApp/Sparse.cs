@@ -34,18 +34,14 @@ namespace SparseApp
             }
             else
             {
-                StandardKernel kernel = new StandardKernel(new DefaultModule());
-                App app = kernel.Get<App>();
-                app.Logger.Info("Initializing UI Components");
+                App app = new App();
                 app.InitializeComponent();
-                app.Logger.Info("Running Sparse App");
                 try
                 {
                     app.Run();
                 }
                 catch (Exception ex)
                 {
-                    app.Logger.FatalException("Uncaught exception", ex);
                 }
             }
         }
