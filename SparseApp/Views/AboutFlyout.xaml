@@ -30,13 +30,13 @@
                     <Image Width="200" Height="200" Source="/SparseApp;component/Resources/SparseApp-Logo.png" RenderOptions.BitmapScalingMode="HighQuality"></Image>
                     <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
                     <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock TextAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
+                        <TextBlock Margin="5">
                             <Hyperlink NavigateUri="https://gitter.im/mauris/sparseapp" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None" Foreground="Black">
                                 <TextBlock FontFamily="Wingdings">*</TextBlock> Chat Support
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock TextAlignment="Center" Margin="5">
+                        <TextBlock Margin="5">
                             <Hyperlink Click="OpenLogHyperlink_Click" TextDecorations="None" Foreground="Black">
                                 <TextBlock FontFamily="Wingdings">3</TextBlock> Open Log
                             </Hyperlink>
