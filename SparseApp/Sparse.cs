@@ -36,13 +36,7 @@ namespace SparseApp
             {
                 App app = new App();
                 app.InitializeComponent();
-                try
-                {
-                    app.Run();
-                }
-                catch (Exception ex)
-                {
-                }
+                app.Run();
             }
         }
 
