@@ -162,27 +162,16 @@ namespace SparseApp.Views
             Dispatcher.Invoke(new Action(() => btnUpdateAvailable.Visibility = updateAvailable ? Visibility.Visible : Visibility.Collapsed));
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            TabControl origin = (TabControl)sender;
-            if(origin.SelectedIndex == 2)
-            {
-                if (updateThread == null || !updateThread.IsAlive)
-                {
-                    Assembly assembly = Assembly.GetExecutingAssembly();
-                    updateThread = new Thread(new ParameterizedThreadStart(UpdateCheck));
-                    updateThread.IsBackground = true;
-                    updateThread.Start(assembly.GetName().Version.ToString());
-                }
-            }
-        }
-
         private void Flyout_Initialized(object sender, EventArgs e)
         {
             ((App)App.Current).Kernel.Inject(this);
             Assembly assembly = Assembly.GetExecutingAssembly();
             txtAppVersion.Text = "version " + assembly.GetName().Version.ToString();
             LoadLicenses();
+
+            updateThread = new Thread(new ParameterizedThreadStart(UpdateCheck));
+            updateThread.IsBackground = true;
+            updateThread.Start(assembly.GetName().Version.ToString());
         }
     }
 }

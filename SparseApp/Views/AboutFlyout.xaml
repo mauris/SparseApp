@@ -8,7 +8,7 @@
              Margin="160,0,0,0" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth}"
              Theme="Light" Header="About" IsModal="True" Initialized="Flyout_Initialized"
              d:DesignHeight="300" d:DesignWidth="300">
-    <TabControl SelectionChanged="TabControl_SelectionChanged">
+    <TabControl>
         <TabControl.Resources>
             <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
                 <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="12"></Setter>
@@ -27,9 +27,8 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
-                    <Image Width="200" Height="200" Source="/SparseApp;component/Resources/SparseApp-Logo.png" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+                    <Image Width="120" Height="120" Source="/SparseApp;component/Resources/SparseApp-Logo.png" RenderOptions.BitmapScalingMode="HighQuality"></Image>
                     <TextBlock FontSize="40" TextAlignment="Center" TextWrapping="Wrap">Sparse</TextBlock>
-                    <TextBlock Name="txtAppVersion" FontSize="12" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
                         <TextBlock Margin="5">
                             <Hyperlink NavigateUri="https://gitter.im/mauris/sparseapp" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None" Foreground="Black">
@@ -42,6 +41,31 @@
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
+                    <Rectangle Name="icoPluginIndicator" Margin="0 20 0 10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="32" Width="32" Fill="{StaticResource GrayBrush1}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_check}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+
+                    <Button Name="btnUpdateAvailable" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        Update Available
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="{StaticResource GrayBrush1}"></Setter>
+                                <Setter Property="FontSize" Value="14"></Setter>
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=btnUpdateAvailable, Path=Visibility}" Value="Visible">
+                                        <Setter Property="TextBlock.Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        Sparse is up to date!
+                    </TextBlock>
+                    <TextBlock Name="txtAppVersion" FontSize="10" TextAlignment="Center" TextWrapping="Wrap">version 1.0.0</TextBlock>
                 </StackPanel>
                 
                 <TextBlock Grid.Column="1" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
@@ -85,13 +109,6 @@
                         </TextBox>
                     </Grid>
                 </Border>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Update">
-            <Grid>
-                <Button Name="btnUpdateAvailable" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    Update Available
-                </Button>
             </Grid>
         </TabItem>
     </TabControl>
