@@ -52,7 +52,10 @@ namespace SparseApp.Updates
                 JToken release = objects
                     .Where(item => item["tag_name"].ToString() != version)
                     .First();
-                releaseUrl = release["assets"][0]["url"].ToString();
+                if (release["assets"].Count() > 0)
+                {
+                    releaseUrl = release["assets"][0]["url"].ToString();
+                }
             }
         }
     }
