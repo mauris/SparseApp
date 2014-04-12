@@ -169,13 +169,39 @@ You have " + (RepositoryManager.Repositories.Count == 0 ? "no" : RepositoryManag
                 {
                     Dispatcher.Invoke(
                         DispatcherPriority.Normal,
-                        new Action(() => txtPluginOutput.Text = plugin.GetOutput())
+                        new Action(() =>
+                        {
+                            bool isAtEnd = txtPluginOutput.VerticalOffset + txtPluginOutput.ViewportHeight == txtPluginOutput.ExtentHeight;
+                            double position = txtPluginOutput.VerticalOffset;
+                            txtPluginOutput.Text = plugin.GetOutput();
+                            if (isAtEnd)
+                            {
+                                txtPluginOutput.ScrollToEnd();
+                            }
+                            else
+                            {
+                                txtPluginOutput.ScrollToVerticalOffset(position);
+                            }
+                        })
                     );
                     Thread.Sleep(100);
                 }
                 Dispatcher.Invoke(
                     DispatcherPriority.Normal,
-                    new Action(() => txtPluginOutput.Text = plugin.GetOutput())
+                        new Action(() =>
+                        {
+                            bool isAtEnd = txtPluginOutput.VerticalOffset + txtPluginOutput.ViewportHeight == txtPluginOutput.ExtentHeight;
+                            double position = txtPluginOutput.VerticalOffset;
+                            txtPluginOutput.Text = plugin.GetOutput();
+                            if (isAtEnd)
+                            {
+                                txtPluginOutput.ScrollToEnd();
+                            }
+                            else
+                            {
+                                txtPluginOutput.ScrollToVerticalOffset(position);
+                            }
+                        })
                 );
                 Dispatcher.Invoke(
                     DispatcherPriority.Normal,
